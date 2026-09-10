@@ -729,32 +729,80 @@
       }
     });
 
-    const labels = ['Delivered', 'Processing', 'Returned', 'Cancelled'];
-    const counts = labels.map(l => statusMap[l]);
+    const totalOrders = filteredData.length;
+    const baseLabels = ['Delivered', 'Processing', 'Returned', 'Cancelled'];
+    const counts = baseLabels.map(l => statusMap[l]);
     const bgColors = ['#10b981', '#6366f1', '#f59e0b', '#f43f5e'];
+
+    // Formatted labels with visible percentages directly in the legend!
+    const legendLabels = baseLabels.map(l => {
+      const c = statusMap[l];
+      const pct = totalOrders > 0 ? ((c / totalOrders) * 100).toFixed(1) : 0;
+      return `${l} (${pct}%)`;
+    });
+
+    // Update Center Donut Callout
+    const delivCount = statusMap['Delivered'] || 0;
+    const delivPct = totalOrders > 0 ? ((delivCount / totalOrders) * 100).toFixed(1) : 0;
+    const centerVal = document.getElementById('donutCenterVal');
+    const centerLabel = document.getElementById('donutCenterLabel');
+    if (centerVal) centerVal.textContent = `${delivPct}%`;
+    if (centerLabel) centerLabel.textContent = 'Delivered';
+
+    // Populate Permanent Data Breakdown Grid (Visible without hovering!)
+    const grid = document.getElementById('orderStatusBreakdownGrid');
+    if (grid) {
+      grid.innerHTML = baseLabels.map(l => {
+        const c = statusMap[l];
+        const pct = totalOrders > 0 ? ((c / totalOrders) * 100).toFixed(1) : 0;
+        const rev = revMap[l];
+        const key = l.toLowerCase();
+        return `
+          <div class="status-stat-card ${key}">
+            <div class="status-stat-header">
+              <span class="status-stat-title">
+                <span class="status-indicator-dot ${key}"></span>
+                ${l}
+              </span>
+              <span class="status-stat-badge ${key}">${pct}%</span>
+            </div>
+            <div class="status-stat-orders">${fmtNumber(c)} <span style="font-size: 0.7rem; font-weight: 500; color: var(--text-muted);">orders</span></div>
+            <div class="status-stat-rev">
+              <span>Revenue:</span>
+              <strong style="color: var(--text-primary);">${fmtCurrency(rev)}</strong>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
 
     if (statusChart) statusChart.destroy();
 
     statusChart = new Chart(ctx, {
       type: 'doughnut',
       data: {
-        labels: labels,
+        labels: legendLabels,
         datasets: [{
           data: counts,
           backgroundColor: bgColors,
-          borderColor: currentTheme === 'dark' ? '#131c2e' : '#ffffff',
-          borderWidth: 2,
+          borderColor: currentTheme === 'dark' ? 'rgba(16, 24, 40, 0.9)' : '#ffffff',
+          borderWidth: 2.5,
           hoverOffset: 6
         }]
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        cutout: '72%',
+        cutout: '68%',
         plugins: {
           legend: {
             position: 'bottom',
-            labels: { color: colors.textColor, font: { family: 'Plus Jakarta Sans', size: 11, weight: '600' } }
+            labels: {
+              color: colors.textColor,
+              font: { family: 'Plus Jakarta Sans', size: 10.5, weight: '600' },
+              boxWidth: 10,
+              padding: 10
+            }
           },
           tooltip: {
             backgroundColor: colors.tooltipBg,
@@ -762,15 +810,17 @@
             bodyColor: colors.tooltipText,
             borderColor: colors.tooltipBorder,
             borderWidth: 1,
+            cornerRadius: 12,
+            padding: 12,
             callbacks: {
               label: function(context) {
-                const label = context.label || '';
+                const idx = context.dataIndex;
+                const statusName = baseLabels[idx];
                 const count = context.parsed;
-                const total = filteredData.length;
-                const pct = total > 0 ? ((count / total) * 100).toFixed(1) : 0;
-                const rev = revMap[label] || 0;
+                const pct = totalOrders > 0 ? ((count / totalOrders) * 100).toFixed(1) : 0;
+                const rev = revMap[statusName] || 0;
                 return [
-                  `${label}: ${fmtNumber(count)} orders (${pct}%)`,
+                  `${statusName}: ${fmtNumber(count)} orders (${pct}%)`,
                   `Revenue: ${fmtCurrency(rev)}`
                 ];
               }

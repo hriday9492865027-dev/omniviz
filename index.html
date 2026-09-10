@@ -261,8 +261,19 @@
               <p class="chart-subtitle">Fulfillment distribution & revenue at risk</p>
             </div>
           </div>
-          <div class="chart-body" style="min-height: 320px;">
-            <canvas id="orderStatusChart"></canvas>
+          <div class="donut-chart-wrapper">
+            <div class="chart-body" style="min-height: 220px; max-height: 230px; position: relative;">
+              <canvas id="orderStatusChart"></canvas>
+              <!-- Center Donut Dynamic Summary -->
+              <div id="donutCenterStats" class="donut-center-stats">
+                <span id="donutCenterVal" class="donut-center-val">62.7%</span>
+                <span id="donutCenterLabel" class="donut-center-label">Delivered</span>
+              </div>
+            </div>
+          </div>
+          <!-- Permanent Visible Data Breakdown Grid (Visible without hovering) -->
+          <div id="orderStatusBreakdownGrid" class="status-stats-grid">
+            <!-- Dynamically populated via app.js -->
           </div>
         </div>
       </div>
