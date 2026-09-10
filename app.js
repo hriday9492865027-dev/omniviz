@@ -532,9 +532,9 @@
     return {
       textColor: isDark ? '#94a3b8' : '#475569',
       gridColor: isDark ? 'rgba(255, 255, 255, 0.06)' : 'rgba(0, 0, 0, 0.06)',
-      tooltipBg: isDark ? '#1a263d' : '#ffffff',
+      tooltipBg: isDark ? 'rgba(16, 24, 40, 0.88)' : 'rgba(255, 255, 255, 0.92)',
       tooltipText: isDark ? '#f8fafc' : '#0f172a',
-      tooltipBorder: isDark ? 'rgba(255, 255, 255, 0.12)' : 'rgba(0, 0, 0, 0.1)'
+      tooltipBorder: isDark ? 'rgba(255, 255, 255, 0.18)' : 'rgba(0, 0, 0, 0.12)'
     };
   }
 
@@ -546,8 +546,9 @@
       bodyColor: colors.tooltipText,
       borderColor: colors.tooltipBorder,
       borderWidth: 1,
-      padding: 10,
-      boxPadding: 4,
+      cornerRadius: 12,
+      padding: 12,
+      boxPadding: 6,
       usePointStyle: true,
       callbacks: {
         label: function(context) {
