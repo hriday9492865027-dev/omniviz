@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OmniViz | Enterprise E-Commerce Analytics & Executive Intelligence</title>
+  <meta name="description" content="Competition-ready interactive e-commerce analytics dashboard. Real-time profitability, category trends, discount erosion audit, and logistics intelligence.">
+  <link rel="stylesheet" href="style.css">
+  <!-- Chart.js 4.4.1 -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <!-- Ambient Gradient Accents -->
+  <div class="ambient-glow-1"></div>
+  <div class="ambient-glow-2"></div>
+
+  <div class="app-layout">
+    <!-- Top Navigation Bar -->
+    <header class="top-nav">
+      <div class="brand-section">
+        <div class="brand-icon-box">
+          <i data-lucide="bar-chart-3" style="width: 22px; height: 22px;"></i>
+        </div>
+        <div>
+          <h1 class="brand-title">
+            OmniViz Analytics
+            <span class="badge-competition">Hackathon Edition</span>
+          </h1>
+          <p style="font-size: 0.725rem; color: var(--text-muted);">Enterprise Sales Intelligence & Strategic Audit</p>
+        </div>
+      </div>
+
+      <div class="nav-actions">
+        <button id="themeToggleBtn" class="nav-btn" title="Toggle Dark/Light Mode">
+          <i data-lucide="moon" id="themeIcon" style="width: 15px; height: 15px;"></i>
+          <span id="themeText">Dark Mode</span>
+        </button>
+        <button id="exportCsvBtn" class="nav-btn" title="Export Filtered Transactions">
+          <i data-lucide="download" style="width: 15px; height: 15px;"></i>
+          <span>Export CSV</span>
+        </button>
+        <button id="printReportBtn" class="nav-btn primary" title="Print Executive Summary">
+          <i data-lucide="printer" style="width: 15px; height: 15px;"></i>
+          <span>Report PDF</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Sticky Interactive Filter Bar -->
+    <div class="filter-bar-container">
+      <div class="filter-bar-main">
+        <!-- Year Filter -->
+        <div class="filter-group">
+          <label for="filterYear"><i data-lucide="calendar" style="width: 13px; height: 13px;"></i> Year</label>
+          <select id="filterYear" class="filter-select">
+            <option value="ALL">All Years (2021-2024)</option>
+            <option value="2024">2024</option>
+            <option value="2023">2023</option>
+            <option value="2022">2022</option>
+            <option value="2021">2021</option>
+          </select>
+        </div>
+
+        <!-- Region Filter -->
+        <div class="filter-group">
+          <label for="filterRegion"><i data-lucide="globe-2" style="width: 13px; height: 13px;"></i> Region</label>
+          <select id="filterRegion" class="filter-select">
+            <option value="ALL">All Regions</option>
+            <option value="Asia">Asia</option>
+            <option value="Europe">Europe</option>
+            <option value="Middle East">Middle East</option>
+            <option value="North America">North America</option>
+          </select>
+        </div>
+
+        <!-- Category Filter -->
+        <div class="filter-group">
+          <label for="filterCategory"><i data-lucide="layers" style="width: 13px; height: 13px;"></i> Category</label>
+          <select id="filterCategory" class="filter-select">
+            <option value="ALL">All Categories</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Home & Kitchen">Home & Kitchen</option>
+            <option value="Clothing">Clothing</option>
+            <option value="Books & Media">Books & Media</option>
+            <option value="Beauty & Health">Beauty & Health</option>
+          </select>
+        </div>
+
+        <!-- Customer Segment Filter -->
+        <div class="filter-group">
+          <label for="filterSegment"><i data-lucide="users" style="width: 13px; height: 13px;"></i> Segment</label>
+          <select id="filterSegment" class="filter-select">
+            <option value="ALL">All Segments</option>
+            <option value="VIP">VIP</option>
+            <option value="Premium">Premium</option>
+            <option value="Regular">Regular</option>
+            <option value="New">New</option>
+          </select>
+        </div>
+
+        <!-- Order Status Filter -->
+        <div class="filter-group">
+          <label for="filterStatus"><i data-lucide="package-check" style="width: 13px; height: 13px;"></i> Status</label>
+          <select id="filterStatus" class="filter-select">
+            <option value="ALL">All Statuses</option>
+            <option value="Delivered">Delivered</option>
+            <option value="Processing">Processing</option>
+            <option value="Returned">Returned</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
+        </div>
+
+        <!-- Live Search -->
+        <div class="search-box">
+          <i data-lucide="search" class="search-icon" style="width: 14px; height: 14px;"></i>
+          <input type="text" id="searchInput" class="search-input" placeholder="Search product, order, country...">
+        </div>
+
+        <!-- Reset Button -->
+        <button id="resetFiltersBtn" class="btn-reset-filters" title="Reset all filters">
+          <i data-lucide="rotate-ccw" style="width: 13px; height: 13px;"></i>
+          Reset
+        </button>
+      </div>
+
+      <!-- Active Filter Chips & Record Count -->
+      <div class="active-chips-bar">
+        <span class="active-filter-label">Active Filters:</span>
+        <div id="activeChipsContainer" style="display: inline-flex; gap: 0.4rem; flex-wrap: wrap;">
+          <!-- Dynamically inserted chips -->
+          <span class="filter-chip">All Transactions</span>
+        </div>
+        <div class="data-stats-pill" id="recordStatsPill">
+          Showing 10,000 / 10,000 orders (100%)
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Dashboard Content -->
+    <main class="dashboard-content">
+
+      <!-- Dynamic Executive Key Insights -->
+      <section class="insights-banner">
+        <div class="insights-header">
+          <h2 class="insights-title">
+            <i data-lucide="sparkles" style="color: var(--accent-cyan); width: 20px; height: 20px;"></i>
+            Automated Executive Key Insights
+          </h2>
+          <span style="font-size: 0.725rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace;" id="insightsGeneratedTimestamp">Real-time dynamic synthesis</span>
+        </div>
+
+        <div class="insights-grid" id="insightsCardsGrid">
+          <!-- Dynamically populated insight cards -->
+        </div>
+      </section>
+
+      <!-- KPI Overview Grid -->
+      <section class="kpi-grid">
+        <!-- Total Revenue -->
+        <div class="kpi-card rev">
+          <div class="kpi-header">
+            <span class="kpi-label">Total Revenue</span>
+            <div class="kpi-icon-pill"><i data-lucide="dollar-sign" style="width: 16px; height: 16px;"></i></div>
+          </div>
+          <div class="kpi-value" id="kpiRevenue">$0.00</div>
+          <div class="kpi-footer">
+            <span id="kpiRevSubtext">100% of portfolio</span>
+            <span class="kpi-badge positive" id="kpiRevBadge"><i data-lucide="trending-up" style="width: 12px; height: 12px;"></i> Core Topline</span>
+          </div>
+        </div>
+
+        <!-- Total Profit -->
+        <div class="kpi-card profit">
+          <div class="kpi-header">
+            <span class="kpi-label">Total Profit</span>
+            <div class="kpi-icon-pill"><i data-lucide="wallet" style="width: 16px; height: 16px;"></i></div>
+          </div>
+          <div class="kpi-value" id="kpiProfit">$0.00</div>
+          <div class="kpi-footer">
+            <span id="kpiCostSubtext">Cost: $0.00</span>
+            <span class="kpi-badge positive" id="kpiProfitBadge"><i data-lucide="check-circle-2" style="width: 12px; height: 12px;"></i> Net Bottomline</span>
+          </div>
+        </div>
+
+        <!-- Profit Margin -->
+        <div class="kpi-card margin">
+          <div class="kpi-header">
+            <span class="kpi-label">Profit Margin</span>
+            <div class="kpi-icon-pill"><i data-lucide="percent" style="width: 16px; height: 16px;"></i></div>
+          </div>
+          <div class="kpi-value" id="kpiMargin">0.00%</div>
+          <div class="kpi-footer">
+            <span id="kpiMarginSubtext">Benchmark: 25.0%</span>
+            <span class="kpi-badge positive" id="kpiMarginBadge">Healthy</span>
+          </div>
+        </div>
+
+        <!-- Total Orders -->
+        <div class="kpi-card orders">
+          <div class="kpi-header">
+            <span class="kpi-label">Total Orders</span>
+            <div class="kpi-icon-pill"><i data-lucide="shopping-bag" style="width: 16px; height: 16px;"></i></div>
+          </div>
+          <div class="kpi-value" id="kpiOrders">0</div>
+          <div class="kpi-footer">
+            <span id="kpiQtySubtext">Units: 0</span>
+            <span class="kpi-badge neutral" id="kpiAovBadge">AOV: $0.00</span>
+          </div>
+        </div>
+
+        <!-- Average Discount & Loss Orders -->
+        <div class="kpi-card aov">
+          <div class="kpi-header">
+            <span class="kpi-label">Avg Discount / Risk</span>
+            <div class="kpi-icon-pill"><i data-lucide="shield-alert" style="width: 16px; height: 16px;"></i></div>
+          </div>
+          <div class="kpi-value" id="kpiDiscount">0.0%</div>
+          <div class="kpi-footer">
+            <span id="kpiLossOrdersSubtext">Loss Orders: 0 (0.0%)</span>
+            <span class="kpi-badge negative" id="kpiLossBadge">Loss Drag</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Time Trends & Order Status -->
+      <div class="charts-grid-2col">
+        <!-- Revenue & Profit Trend Over Time (Col-8) -->
+        <div class="chart-card col-8">
+          <div class="chart-header">
+            <div class="chart-title-area">
+              <h3 class="chart-title">
+                <i data-lucide="trending-up" style="color: var(--accent-primary); width: 18px; height: 18px;"></i>
+                Revenue & Profit Trajectory Over Time
+              </h3>
+              <p class="chart-subtitle">Historical financial velocity, net profitability, and profit margin trajectory</p>
+            </div>
+            <div class="chart-controls">
+              <div class="pill-toggle-group">
+                <button class="pill-btn" data-time="yearly">Yearly</button>
+                <button class="pill-btn" data-time="quarterly">Quarterly</button>
+                <button class="pill-btn active" data-time="monthly">Monthly</button>
+              </div>
+            </div>
+          </div>
+          <div class="chart-body" style="min-height: 320px;">
+            <canvas id="timeTrendChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Order Status Breakdown (Col-4) -->
+        <div class="chart-card col-4">
+          <div class="chart-header">
+            <div class="chart-title-area">
+              <h3 class="chart-title">
+                <i data-lucide="pie-chart" style="color: var(--accent-cyan); width: 18px; height: 18px;"></i>
+                Order Status Breakdown
+              </h3>
+              <p class="chart-subtitle">Fulfillment distribution & revenue at risk</p>
+            </div>
+          </div>
+          <div class="chart-body" style="min-height: 320px;">
+            <canvas id="orderStatusChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Category & Regional Performance -->
+      <div class="charts-grid-2col">
+        <!-- Revenue and Profit by Category (Col-6) -->
+        <div class="chart-card col-6">
+          <div class="chart-header">
+            <div class="chart-title-area">
+              <h3 class="chart-title">
+                <i data-lucide="layers" style="color: var(--accent-emerald); width: 18px; height: 18px;"></i>
+                Revenue & Profit by Category
+              </h3>
+              <p class="chart-subtitle">Comparative volume, bottomline contribution & margins</p>
+            </div>
+          </div>
+          <div class="chart-body">
+            <canvas id="categoryChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Revenue and Profit by Region (Col-6) -->
+        <div class="chart-card col-6">
+          <div class="chart-header">
+            <div class="chart-title-area">
+              <h3 class="chart-title">
+                <i data-lucide="map-pin" style="color: var(--accent-purple); width: 18px; height: 18px;"></i>
+                Revenue & Profit by Region
+              </h3>
+              <p class="chart-subtitle">Geographic performance and shipping speed benchmark</p>
+            </div>
+          </div>
+          <div class="chart-body">
+            <canvas id="regionChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Strategic Pricing & Discount Audit (Crucial Hackathon Insight!) -->
+      <div class="charts-grid-2col">
+        <!-- Discount vs Profit Analysis (Col-8) -->
+        <div class="chart-card col-8">
+          <div class="chart-header">
+            <div class="chart-title-area">
+              <h3 class="chart-title">
+                <i data-lucide="alert-triangle" style="color: var(--accent-rose); width: 18px; height: 18px;"></i>
+                Discount vs Profit Strategic Audit: The Erosion Curve
+              </h3>
+              <p class="chart-subtitle">Quantifying how excessive discounting triggers destructive transaction losses</p>
+            </div>
+          </div>
+          <!-- Risk Callout Banner -->
+          <div class="risk-callout-box">
+            <div class="risk-callout-text">
+              <strong>Critical Vulnerability Discovered:</strong> Discounts &le; 25% yield zero loss transactions. At 30%, losses begin. Discounts of 40%&ndash;50% turn net profit negative (-$54.8K cumulative loss).
+            </div>
+            <div class="risk-callout-stat" id="discountLossPill">1,338 Loss Orders</div>
+          </div>
+          <div class="chart-body" style="min-height: 310px;">
+            <canvas id="discountProfitChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Customer Segment Performance (Col-4) -->
+        <div class="chart-card col-4">
+          <div class="chart-header">
+            <div class="chart-title-area">
+              <h3 class="chart-title">
+                <i data-lucide="users-2" style="color: var(--accent-amber); width: 18px; height: 18px;"></i>
+                Customer Segment Performance
+              </h3>
+              <p class="chart-subtitle">Revenue, Profit & AOV across VIP, Premium, Regular, New</p>
+            </div>
+          </div>
+          <div class="chart-body" style="min-height: 310px;">
+            <canvas id="segmentChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Shipping Performance & Top 10 Products -->
+      <div class="charts-grid-2col">
+        <!-- Top 10 Products Leaderboard (Col-7) -->
+        <div class="chart-card col-8">
+          <div class="chart-header">
+            <div class="chart-title-area">
+              <h3 class="chart-title">
+                <i data-lucide="award" style="color: #f59e0b; width: 18px; height: 18px;"></i>
+                Top 10 Products Leaderboard
+              </h3>
+              <p class="chart-subtitle">Best performing individual products by financial contribution</p>
+            </div>
+            <div class="chart-controls">
+              <div class="pill-toggle-group">
+                <button class="pill-btn active" id="btnTopRevenue">By Revenue</button>
+                <button class="pill-btn" id="btnTopProfit">By Profit</button>
+                <button class="pill-btn" id="btnTopUnits">By Units</button>
+              </div>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="modern-table" id="topProductsTable">
+              <thead>
+                <tr>
+                  <th style="width: 45px;">Rank</th>
+                  <th>Product Name</th>
+                  <th>Category</th>
+                  <th style="text-align: right;">Orders</th>
+                  <th style="text-align: right;">Units</th>
+                  <th style="text-align: right;">Revenue</th>
+                  <th style="text-align: right;">Profit</th>
+                  <th style="text-align: right;">Margin</th>
+                </tr>
+              </thead>
+              <tbody id="topProductsTableBody">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Shipping Performance Matrix (Col-4) -->
+        <div class="chart-card col-4">
+          <div class="chart-header">
+            <div class="chart-title-area">
+              <h3 class="chart-title">
+                <i data-lucide="truck" style="color: var(--accent-cyan); width: 18px; height: 18px;"></i>
+                Shipping Logistics Matrix
+              </h3>
+              <p class="chart-subtitle">Speed, Freight Cost, & Net Margin After Shipping</p>
+            </div>
+          </div>
+          <div class="chart-body" style="min-height: 320px;">
+            <canvas id="shippingChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: What-If Strategic Profit Simulator -->
+      <section class="simulator-box">
+        <div class="simulator-controls">
+          <div>
+            <h3 style="font-size: 1.05rem; font-weight: 700; color: #ffffff; display: flex; align-items: center; gap: 0.5rem;">
+              <i data-lucide="sliders" style="color: var(--accent-primary); width: 18px; height: 18px;"></i>
+              Executive Strategy Simulator (What-If Analysis)
+            </h3>
+            <p style="font-size: 0.775rem; color: var(--text-muted); margin-top: 0.2rem;">
+              Simulate strategic policy changes on the dataset to estimate profit recapture and margin expansion.
+            </p>
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-header">
+              <span>Cap Max Allowed Discount</span>
+              <span id="sliderDiscountVal" style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary-light);">25%</span>
+            </div>
+            <input type="range" id="simDiscountRange" class="custom-range" min="15" max="50" step="5" value="25">
+            <div style="display: flex; justify-content: space-between; font-size: 0.675rem; color: var(--text-muted);">
+              <span>15% (Strict)</span>
+              <span>25% (Recommended Safe)</span>
+              <span>50% (Current Uncapped)</span>
+            </div>
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-header">
+              <span>Return Rate Mitigation</span>
+              <span id="sliderReturnVal" style="font-family: 'JetBrains Mono', monospace; color: var(--accent-emerald);">20% Reduction</span>
+            </div>
+            <input type="range" id="simReturnRange" class="custom-range" min="0" max="50" step="5" value="20">
+            <div style="display: flex; justify-content: space-between; font-size: 0.675rem; color: var(--text-muted);">
+              <span>0% (As-is)</span>
+              <span>20% (Targeted QA)</span>
+              <span>50% (Optimized)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="simulator-outcome">
+          <div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.05em;">
+            Projected Impact on Bottomline
+          </div>
+          <div class="outcome-gain" id="simProfitGain">+$54,847.48</div>
+          <p style="font-size: 0.775rem; color: var(--text-secondary);">
+            Estimated incremental net profit unlocked by eliminating unprofitable discount tiers and recovering return logistics costs.
+          </p>
+          <hr style="border: none; border-top: 1px solid var(--border-subtle); margin: 0.25rem 0;">
+          <div class="outcome-stat">
+            <span style="color: var(--text-muted);">Projected Net Profit:</span>
+            <strong id="simProjectedProfit" style="font-family: 'JetBrains Mono', monospace;">$1,492,485.79</strong>
+          </div>
+          <div class="outcome-stat">
+            <span style="color: var(--text-muted);">New Profit Margin:</span>
+            <strong id="simProjectedMargin" style="font-family: 'JetBrains Mono', monospace; color: var(--accent-emerald);">28.24% (+1.04%)</strong>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Data Explorer (Filtered Transactions Table) -->
+      <section class="chart-card col-12">
+        <div class="chart-header">
+          <div class="chart-title-area">
+            <h3 class="chart-title">
+              <i data-lucide="database" style="color: var(--accent-primary); width: 18px; height: 18px;"></i>
+              Transaction Data Explorer
+            </h3>
+            <p class="chart-subtitle">Granular row-level transactions calculated directly from ecommerce_sales_dataset.csv</p>
+          </div>
+          <div class="chart-controls">
+            <span style="font-size: 0.775rem; color: var(--text-muted);" id="tableRowsInfo">Showing 1-10 of 10,000</span>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="modern-table" id="dataTable">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Date</th>
+                <th>Region / Country</th>
+                <th>Category</th>
+                <th>Product</th>
+                <th style="text-align: right;">Qty</th>
+                <th style="text-align: right;">Discount</th>
+                <th style="text-align: right;">Revenue</th>
+                <th style="text-align: right;">Cost</th>
+                <th style="text-align: right;">Profit</th>
+                <th>Shipping</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="dataTableBody">
+              <!-- Dynamically rendered -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination Controls -->
+        <div class="pagination-controls">
+          <div>
+            Page <span id="currentPageNum" style="font-weight: 700; color: var(--text-primary);">1</span> of <span id="totalPageNum" style="font-weight: 700;">1000</span>
+          </div>
+          <div style="display: flex; gap: 0.4rem;">
+            <button id="btnPrevPage" class="pagination-btn"><i data-lucide="chevron-left" style="width: 14px; height: 14px; vertical-align: middle;"></i> Previous</button>
+            <button id="btnNextPage" class="pagination-btn">Next <i data-lucide="chevron-right" style="width: 14px; height: 14px; vertical-align: middle;"></i></button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="dashboard-footer">
+      <div>
+        <strong>OmniViz Analytics Engine</strong> &mdash; 100% Calculated dynamically from <code>ecommerce_sales_dataset.csv</code> (10,000 Transactions).
+      </div>
+      <div class="footer-tags">
+        <span class="footer-tag">Zero Mock Data</span>
+        <span class="footer-tag">Sub-millisecond Filtering</span>
+        <span class="footer-tag">University Hackathon Benchmark</span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Load Data and Main Script -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
