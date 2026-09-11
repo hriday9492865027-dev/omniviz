@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OmniViz | Enterprise E-Commerce Analytics & Executive Intelligence</title>
-  <meta name="description" content="Competition-ready interactive e-commerce analytics dashboard. Real-time profitability, category trends, discount erosion audit, and logistics intelligence.">
+  <title>OmniViz | Microsoft Power BI Enterprise Sales Report</title>
+  <meta name="description" content="Power BI interactive e-commerce analytics report. Real-time profitability, category trends, discount erosion audit, and logistics intelligence.">
   <link rel="stylesheet" href="style.css">
   <!-- Chart.js 4.4.1 -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
@@ -12,47 +12,48 @@
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
-  <!-- Ambient Gradient Accents -->
-  <div class="ambient-glow-1"></div>
-  <div class="ambient-glow-2"></div>
-  <div class="ambient-glow-3"></div>
 
   <div class="app-layout">
-    <!-- Top Navigation Bar -->
+    <!-- Power BI Service Top Navigation Bar -->
     <header class="top-nav">
       <div class="brand-section">
-        <div class="brand-icon-box">
-          <i data-lucide="bar-chart-3" style="width: 22px; height: 22px;"></i>
+        <div class="brand-icon-box" title="Microsoft Power BI Visual Engine">
+          <!-- Stepped Power BI Bars Icon -->
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+            <rect x="3" y="11" width="4" height="10" rx="1"/>
+            <rect x="10" y="6" width="4" height="15" rx="1"/>
+            <rect x="17" y="2" width="4" height="19" rx="1"/>
+          </svg>
         </div>
         <div>
           <h1 class="brand-title">
             OmniViz Analytics
-            <span class="badge-competition">Hackathon Edition</span>
+            <span class="badge-competition">Power BI Report</span>
           </h1>
-          <p style="font-size: 0.725rem; color: var(--text-muted);">Enterprise Sales Intelligence & Strategic Audit</p>
+          <p style="font-size: 0.725rem; color: #C8C6C4;">Executive Sales Intelligence &amp; Strategic Audit</p>
         </div>
       </div>
 
       <div class="nav-actions">
         <button id="themeToggleBtn" class="nav-btn" title="Toggle Dark/Light Mode">
-          <i data-lucide="moon" id="themeIcon" style="width: 15px; height: 15px;"></i>
+          <i data-lucide="moon" id="themeIcon" style="width: 14px; height: 14px;"></i>
           <span id="themeText">Dark Mode</span>
         </button>
         <button id="exportCsvBtn" class="nav-btn" title="Export Filtered Transactions">
-          <i data-lucide="download" style="width: 15px; height: 15px;"></i>
-          <span>Export CSV</span>
+          <i data-lucide="download" style="width: 14px; height: 14px;"></i>
+          <span>Export Data</span>
         </button>
         <button id="printReportBtn" class="nav-btn primary" title="Print Executive Summary">
-          <i data-lucide="printer" style="width: 15px; height: 15px;"></i>
-          <span>Report PDF</span>
+          <i data-lucide="printer" style="width: 14px; height: 14px;"></i>
+          <span>Export PDF</span>
         </button>
       </div>
     </header>
 
-    <!-- Sticky Interactive Filter Bar -->
+    <!-- Power BI Sticky Slicers Bar -->
     <div class="filter-bar-container">
       <div class="filter-bar-main">
-        <!-- Year Filter -->
+        <!-- Year Slicer -->
         <div class="filter-group">
           <label for="filterYear"><i data-lucide="calendar" style="width: 13px; height: 13px;"></i> Year</label>
           <select id="filterYear" class="filter-select">
@@ -64,7 +65,7 @@
           </select>
         </div>
 
-        <!-- Region Filter -->
+        <!-- Region Slicer -->
         <div class="filter-group">
           <label for="filterRegion"><i data-lucide="globe-2" style="width: 13px; height: 13px;"></i> Region</label>
           <select id="filterRegion" class="filter-select">
@@ -76,7 +77,7 @@
           </select>
         </div>
 
-        <!-- Category Filter -->
+        <!-- Category Slicer -->
         <div class="filter-group">
           <label for="filterCategory"><i data-lucide="layers" style="width: 13px; height: 13px;"></i> Category</label>
           <select id="filterCategory" class="filter-select">
@@ -89,7 +90,7 @@
           </select>
         </div>
 
-        <!-- Customer Segment Filter -->
+        <!-- Customer Segment Slicer -->
         <div class="filter-group">
           <label for="filterSegment"><i data-lucide="users" style="width: 13px; height: 13px;"></i> Segment</label>
           <select id="filterSegment" class="filter-select">
@@ -101,7 +102,7 @@
           </select>
         </div>
 
-        <!-- Order Status Filter -->
+        <!-- Order Status Slicer -->
         <div class="filter-group">
           <label for="filterStatus"><i data-lucide="package-check" style="width: 13px; height: 13px;"></i> Status</label>
           <select id="filterStatus" class="filter-select">
@@ -113,23 +114,23 @@
           </select>
         </div>
 
-        <!-- Live Search -->
+        <!-- Live Search Box -->
         <div class="search-box">
-          <i data-lucide="search" class="search-icon" style="width: 14px; height: 14px;"></i>
+          <i data-lucide="search" class="search-icon" style="width: 13px; height: 13px;"></i>
           <input type="text" id="searchInput" class="search-input" placeholder="Search product, order, country...">
         </div>
 
-        <!-- Reset Button -->
-        <button id="resetFiltersBtn" class="btn-reset-filters" title="Reset all filters">
+        <!-- Reset Slicers Button -->
+        <button id="resetFiltersBtn" class="btn-reset-filters" title="Reset all slicers">
           <i data-lucide="rotate-ccw" style="width: 13px; height: 13px;"></i>
-          Reset
+          Clear Slicers
         </button>
       </div>
 
-      <!-- Active Filter Chips & Record Count -->
+      <!-- Applied Filters Slicer Breadcrumb -->
       <div class="active-chips-bar">
-        <span class="active-filter-label">Active Filters:</span>
-        <div id="activeChipsContainer" style="display: inline-flex; gap: 0.4rem; flex-wrap: wrap;">
+        <span class="active-filter-label">Applied Slicers:</span>
+        <div id="activeChipsContainer" style="display: inline-flex; gap: 0.35rem; flex-wrap: wrap;">
           <!-- Dynamically inserted chips -->
           <span class="filter-chip">All Transactions</span>
         </div>
@@ -139,113 +140,122 @@
       </div>
     </div>
 
-    <!-- Main Dashboard Content -->
+    <!-- Main Report Canvas -->
     <main class="dashboard-content">
 
-      <!-- Dynamic Executive Key Insights -->
-      <section class="insights-banner">
-        <div class="insights-header">
-          <h2 class="insights-title">
-            <i data-lucide="sparkles" style="color: var(--accent-cyan); width: 20px; height: 20px;"></i>
-            Automated Executive Key Insights
-          </h2>
-          <span style="font-size: 0.725rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace;" id="insightsGeneratedTimestamp">Real-time dynamic synthesis</span>
-        </div>
-
-        <div class="insights-grid" id="insightsCardsGrid">
-          <!-- Dynamically populated insight cards -->
-        </div>
-      </section>
-
-      <!-- KPI Overview Grid -->
-      <section class="kpi-grid">
-        <!-- Total Revenue -->
-        <div class="kpi-card rev">
-          <div class="kpi-header">
-            <span class="kpi-label">Total Revenue</span>
-            <div class="kpi-icon-pill"><i data-lucide="dollar-sign" style="width: 16px; height: 16px;"></i></div>
+      <!-- Section: Executive Overview -->
+      <section id="sectionExecutive" style="display: flex; flex-direction: column; gap: 1.25rem;">
+        <!-- Dynamic Executive Key Insights (Smart Narrative) -->
+        <div class="insights-banner">
+          <div class="insights-header">
+            <h2 class="insights-title">
+              <i data-lucide="sparkles" style="width: 18px; height: 18px;"></i>
+              Executive Key Insights &amp; Smart Narrative
+            </h2>
+            <span style="font-size: 0.725rem; color: var(--text-muted); font-variant-numeric: tabular-nums;" id="insightsGeneratedTimestamp">Real-time dynamic synthesis</span>
           </div>
-          <div class="kpi-value" id="kpiRevenue">$0.00</div>
-          <div class="kpi-footer">
-            <span id="kpiRevSubtext">100% of portfolio</span>
-            <span class="kpi-badge positive" id="kpiRevBadge"><i data-lucide="trending-up" style="width: 12px; height: 12px;"></i> Core Topline</span>
+
+          <div class="insights-grid" id="insightsCardsGrid">
+            <!-- Dynamically populated insight cards -->
           </div>
         </div>
 
-        <!-- Total Profit -->
-        <div class="kpi-card profit">
-          <div class="kpi-header">
-            <span class="kpi-label">Total Profit</span>
-            <div class="kpi-icon-pill"><i data-lucide="wallet" style="width: 16px; height: 16px;"></i></div>
+        <!-- Power BI Multi-Row KPI Overview Grid -->
+        <div class="kpi-grid">
+          <!-- Total Revenue -->
+          <div class="kpi-card rev">
+            <div class="kpi-header">
+              <span class="kpi-label">Total Revenue</span>
+              <div class="kpi-icon-pill"><i data-lucide="dollar-sign" style="width: 15px; height: 15px;"></i></div>
+            </div>
+            <div class="kpi-value" id="kpiRevenue">$0.00</div>
+            <div class="kpi-footer">
+              <span id="kpiRevSubtext">100% of portfolio</span>
+              <span class="kpi-badge positive" id="kpiRevBadge"><i data-lucide="trending-up" style="width: 11px; height: 11px;"></i> Topline</span>
+            </div>
           </div>
-          <div class="kpi-value" id="kpiProfit">$0.00</div>
-          <div class="kpi-footer">
-            <span id="kpiCostSubtext">Cost: $0.00</span>
-            <span class="kpi-badge positive" id="kpiProfitBadge"><i data-lucide="check-circle-2" style="width: 12px; height: 12px;"></i> Net Bottomline</span>
-          </div>
-        </div>
 
-        <!-- Profit Margin -->
-        <div class="kpi-card margin">
-          <div class="kpi-header">
-            <span class="kpi-label">Profit Margin</span>
-            <div class="kpi-icon-pill"><i data-lucide="percent" style="width: 16px; height: 16px;"></i></div>
+          <!-- Total Profit -->
+          <div class="kpi-card profit">
+            <div class="kpi-header">
+              <span class="kpi-label">Total Profit</span>
+              <div class="kpi-icon-pill"><i data-lucide="wallet" style="width: 15px; height: 15px;"></i></div>
+            </div>
+            <div class="kpi-value" id="kpiProfit">$0.00</div>
+            <div class="kpi-footer">
+              <span id="kpiCostSubtext">Cost: $0.00</span>
+              <span class="kpi-badge positive" id="kpiProfitBadge"><i data-lucide="check-circle-2" style="width: 11px; height: 11px;"></i> Bottomline</span>
+            </div>
           </div>
-          <div class="kpi-value" id="kpiMargin">0.00%</div>
-          <div class="kpi-footer">
-            <span id="kpiMarginSubtext">Benchmark: 25.0%</span>
-            <span class="kpi-badge positive" id="kpiMarginBadge">Healthy</span>
-          </div>
-        </div>
 
-        <!-- Total Orders -->
-        <div class="kpi-card orders">
-          <div class="kpi-header">
-            <span class="kpi-label">Total Orders</span>
-            <div class="kpi-icon-pill"><i data-lucide="shopping-bag" style="width: 16px; height: 16px;"></i></div>
+          <!-- Profit Margin -->
+          <div class="kpi-card margin">
+            <div class="kpi-header">
+              <span class="kpi-label">Profit Margin</span>
+              <div class="kpi-icon-pill"><i data-lucide="percent" style="width: 15px; height: 15px;"></i></div>
+            </div>
+            <div class="kpi-value" id="kpiMargin">0.00%</div>
+            <div class="kpi-footer">
+              <span id="kpiMarginSubtext">Benchmark: 25.0%</span>
+              <span class="kpi-badge positive" id="kpiMarginBadge">Healthy</span>
+            </div>
           </div>
-          <div class="kpi-value" id="kpiOrders">0</div>
-          <div class="kpi-footer">
-            <span id="kpiQtySubtext">Units: 0</span>
-            <span class="kpi-badge neutral" id="kpiAovBadge">AOV: $0.00</span>
-          </div>
-        </div>
 
-        <!-- Average Discount & Loss Orders -->
-        <div class="kpi-card aov">
-          <div class="kpi-header">
-            <span class="kpi-label">Avg Discount / Risk</span>
-            <div class="kpi-icon-pill"><i data-lucide="shield-alert" style="width: 16px; height: 16px;"></i></div>
+          <!-- Total Orders -->
+          <div class="kpi-card orders">
+            <div class="kpi-header">
+              <span class="kpi-label">Total Orders</span>
+              <div class="kpi-icon-pill"><i data-lucide="shopping-bag" style="width: 15px; height: 15px;"></i></div>
+            </div>
+            <div class="kpi-value" id="kpiOrders">0</div>
+            <div class="kpi-footer">
+              <span id="kpiQtySubtext">Units: 0</span>
+              <span class="kpi-badge neutral" id="kpiAovBadge">AOV: $0.00</span>
+            </div>
           </div>
-          <div class="kpi-value" id="kpiDiscount">0.0%</div>
-          <div class="kpi-footer">
-            <span id="kpiLossOrdersSubtext">Loss Orders: 0 (0.0%)</span>
-            <span class="kpi-badge negative" id="kpiLossBadge">Loss Drag</span>
+
+          <!-- Average Discount & Loss Orders -->
+          <div class="kpi-card aov">
+            <div class="kpi-header">
+              <span class="kpi-label">Avg Discount / Risk</span>
+              <div class="kpi-icon-pill"><i data-lucide="shield-alert" style="width: 15px; height: 15px;"></i></div>
+            </div>
+            <div class="kpi-value" id="kpiDiscount">0.0%</div>
+            <div class="kpi-footer">
+              <span id="kpiLossOrdersSubtext">Loss Orders: 0 (0.0%)</span>
+              <span class="kpi-badge negative" id="kpiLossBadge">Loss Drag</span>
+            </div>
           </div>
         </div>
       </section>
 
       <!-- Section: Time Trends & Order Status -->
-      <div class="charts-grid-2col">
+      <section id="sectionTrajectory" class="charts-grid-2col">
         <!-- Revenue & Profit Trend Over Time (Col-8) -->
         <div class="chart-card col-8">
           <div class="chart-header">
             <div class="chart-title-area">
               <h3 class="chart-title">
-                <i data-lucide="trending-up" style="color: var(--accent-primary); width: 18px; height: 18px;"></i>
-                Revenue & Profit Trajectory Over Time
+                <i data-lucide="trending-up" style="color: var(--pbi-blue); width: 16px; height: 16px;"></i>
+                Revenue &amp; Profit Velocity Trajectory
               </h3>
               <p class="chart-subtitle">Historical financial velocity, net profitability, and profit margin trajectory</p>
             </div>
-            <div class="chart-controls">
-              <div class="pill-toggle-group">
-                <button class="pill-btn" data-time="yearly">Yearly</button>
-                <button class="pill-btn" data-time="quarterly">Quarterly</button>
-                <button class="pill-btn active" data-time="monthly">Monthly</button>
+            <div style="display: flex; align-items: center; gap: 0.65rem;">
+              <div class="chart-controls">
+                <div class="pill-toggle-group">
+                  <button class="pill-btn" data-time="yearly">Yearly</button>
+                  <button class="pill-btn" data-time="quarterly">Quarterly</button>
+                  <button class="pill-btn active" data-time="monthly">Monthly</button>
+                </div>
+              </div>
+              <div class="pbi-visual-actions">
+                <button class="pbi-icon-btn" title="Focus mode"><i data-lucide="maximize-2" style="width: 13px; height: 13px;"></i></button>
+                <button class="pbi-icon-btn" title="More options"><i data-lucide="more-horizontal" style="width: 13px; height: 13px;"></i></button>
               </div>
             </div>
           </div>
-          <div class="chart-body" style="min-height: 320px;">
+          <div class="chart-body" style="min-height: 310px;">
             <canvas id="timeTrendChart"></canvas>
           </div>
         </div>
@@ -255,14 +265,18 @@
           <div class="chart-header">
             <div class="chart-title-area">
               <h3 class="chart-title">
-                <i data-lucide="pie-chart" style="color: var(--accent-cyan); width: 18px; height: 18px;"></i>
-                Order Status Breakdown
+                <i data-lucide="pie-chart" style="color: var(--pbi-yellow); width: 16px; height: 16px;"></i>
+                Order Status Distribution
               </h3>
-              <p class="chart-subtitle">Fulfillment distribution & revenue at risk</p>
+              <p class="chart-subtitle">Fulfillment distribution &amp; revenue at risk</p>
+            </div>
+            <div class="pbi-visual-actions">
+              <button class="pbi-icon-btn" title="Focus mode"><i data-lucide="maximize-2" style="width: 13px; height: 13px;"></i></button>
+              <button class="pbi-icon-btn" title="More options"><i data-lucide="more-horizontal" style="width: 13px; height: 13px;"></i></button>
             </div>
           </div>
           <div class="donut-chart-wrapper">
-            <div class="chart-body" style="min-height: 220px; max-height: 230px; position: relative;">
+            <div class="chart-body" style="min-height: 210px; max-height: 220px; position: relative;">
               <canvas id="orderStatusChart"></canvas>
               <!-- Center Donut Dynamic Summary -->
               <div id="donutCenterStats" class="donut-center-stats">
@@ -271,24 +285,28 @@
               </div>
             </div>
           </div>
-          <!-- Permanent Visible Data Breakdown Grid (Visible without hovering) -->
+          <!-- Permanent Visible Data Breakdown Grid -->
           <div id="orderStatusBreakdownGrid" class="status-stats-grid">
             <!-- Dynamically populated via app.js -->
           </div>
         </div>
-      </div>
+      </section>
 
       <!-- Section: Category & Regional Performance -->
-      <div class="charts-grid-2col">
+      <section id="sectionCategoryRegion" class="charts-grid-2col">
         <!-- Revenue and Profit by Category (Col-6) -->
         <div class="chart-card col-6">
           <div class="chart-header">
             <div class="chart-title-area">
               <h3 class="chart-title">
-                <i data-lucide="layers" style="color: var(--accent-emerald); width: 18px; height: 18px;"></i>
-                Revenue & Profit by Category
+                <i data-lucide="layers" style="color: var(--pbi-blue); width: 16px; height: 16px;"></i>
+                Revenue &amp; Profit by Category
               </h3>
-              <p class="chart-subtitle">Comparative volume, bottomline contribution & margins</p>
+              <p class="chart-subtitle">Comparative volume, bottomline contribution &amp; margins</p>
+            </div>
+            <div class="pbi-visual-actions">
+              <button class="pbi-icon-btn" title="Focus mode"><i data-lucide="maximize-2" style="width: 13px; height: 13px;"></i></button>
+              <button class="pbi-icon-btn" title="More options"><i data-lucide="more-horizontal" style="width: 13px; height: 13px;"></i></button>
             </div>
           </div>
           <div class="chart-body">
@@ -301,29 +319,37 @@
           <div class="chart-header">
             <div class="chart-title-area">
               <h3 class="chart-title">
-                <i data-lucide="map-pin" style="color: var(--accent-purple); width: 18px; height: 18px;"></i>
-                Revenue & Profit by Region
+                <i data-lucide="map-pin" style="color: var(--pbi-orange); width: 16px; height: 16px;"></i>
+                Revenue &amp; Profit by Region
               </h3>
               <p class="chart-subtitle">Geographic performance and shipping speed benchmark</p>
+            </div>
+            <div class="pbi-visual-actions">
+              <button class="pbi-icon-btn" title="Focus mode"><i data-lucide="maximize-2" style="width: 13px; height: 13px;"></i></button>
+              <button class="pbi-icon-btn" title="More options"><i data-lucide="more-horizontal" style="width: 13px; height: 13px;"></i></button>
             </div>
           </div>
           <div class="chart-body">
             <canvas id="regionChart"></canvas>
           </div>
         </div>
-      </div>
+      </section>
 
-      <!-- Section: Strategic Pricing & Discount Audit (Crucial Hackathon Insight!) -->
-      <div class="charts-grid-2col">
+      <!-- Section: Strategic Pricing & Discount Audit -->
+      <section id="sectionPricingRisk" class="charts-grid-2col">
         <!-- Discount vs Profit Analysis (Col-8) -->
         <div class="chart-card col-8">
           <div class="chart-header">
             <div class="chart-title-area">
               <h3 class="chart-title">
-                <i data-lucide="alert-triangle" style="color: var(--accent-rose); width: 18px; height: 18px;"></i>
+                <i data-lucide="alert-triangle" style="color: var(--pbi-red); width: 16px; height: 16px;"></i>
                 Discount vs Profit Strategic Audit: The Erosion Curve
               </h3>
               <p class="chart-subtitle">Quantifying how excessive discounting triggers destructive transaction losses</p>
+            </div>
+            <div class="pbi-visual-actions">
+              <button class="pbi-icon-btn" title="Focus mode"><i data-lucide="maximize-2" style="width: 13px; height: 13px;"></i></button>
+              <button class="pbi-icon-btn" title="More options"><i data-lucide="more-horizontal" style="width: 13px; height: 13px;"></i></button>
             </div>
           </div>
           <!-- Risk Callout Banner -->
@@ -333,7 +359,7 @@
             </div>
             <div class="risk-callout-stat" id="discountLossPill">1,338 Loss Orders</div>
           </div>
-          <div class="chart-body" style="min-height: 310px;">
+          <div class="chart-body" style="min-height: 300px;">
             <canvas id="discountProfitChart"></canvas>
           </div>
         </div>
@@ -343,35 +369,45 @@
           <div class="chart-header">
             <div class="chart-title-area">
               <h3 class="chart-title">
-                <i data-lucide="users-2" style="color: var(--accent-amber); width: 18px; height: 18px;"></i>
+                <i data-lucide="users-2" style="color: var(--pbi-yellow); width: 16px; height: 16px;"></i>
                 Customer Segment Performance
               </h3>
-              <p class="chart-subtitle">Revenue, Profit & AOV across VIP, Premium, Regular, New</p>
+              <p class="chart-subtitle">Revenue, Profit &amp; AOV across VIP, Premium, Regular, New</p>
+            </div>
+            <div class="pbi-visual-actions">
+              <button class="pbi-icon-btn" title="Focus mode"><i data-lucide="maximize-2" style="width: 13px; height: 13px;"></i></button>
+              <button class="pbi-icon-btn" title="More options"><i data-lucide="more-horizontal" style="width: 13px; height: 13px;"></i></button>
             </div>
           </div>
-          <div class="chart-body" style="min-height: 310px;">
+          <div class="chart-body" style="min-height: 300px;">
             <canvas id="segmentChart"></canvas>
           </div>
         </div>
-      </div>
+      </section>
 
       <!-- Section: Shipping Performance & Top 10 Products -->
       <div class="charts-grid-2col">
-        <!-- Top 10 Products Leaderboard (Col-7) -->
+        <!-- Top 10 Products Leaderboard (Col-8) -->
         <div class="chart-card col-8">
           <div class="chart-header">
             <div class="chart-title-area">
               <h3 class="chart-title">
-                <i data-lucide="award" style="color: #f59e0b; width: 18px; height: 18px;"></i>
-                Top 10 Products Leaderboard
+                <i data-lucide="award" style="color: var(--pbi-yellow); width: 16px; height: 16px;"></i>
+                Top 10 Products Matrix Visual
               </h3>
               <p class="chart-subtitle">Best performing individual products by financial contribution</p>
             </div>
-            <div class="chart-controls">
-              <div class="pill-toggle-group">
-                <button class="pill-btn active" id="btnTopRevenue">By Revenue</button>
-                <button class="pill-btn" id="btnTopProfit">By Profit</button>
-                <button class="pill-btn" id="btnTopUnits">By Units</button>
+            <div style="display: flex; align-items: center; gap: 0.65rem;">
+              <div class="chart-controls">
+                <div class="pill-toggle-group">
+                  <button class="pill-btn active" id="btnTopRevenue">By Revenue</button>
+                  <button class="pill-btn" id="btnTopProfit">By Profit</button>
+                  <button class="pill-btn" id="btnTopUnits">By Units</button>
+                </div>
+              </div>
+              <div class="pbi-visual-actions">
+                <button class="pbi-icon-btn" title="Focus mode"><i data-lucide="maximize-2" style="width: 13px; height: 13px;"></i></button>
+                <button class="pbi-icon-btn" title="More options"><i data-lucide="more-horizontal" style="width: 13px; height: 13px;"></i></button>
               </div>
             </div>
           </div>
@@ -379,7 +415,7 @@
             <table class="modern-table" id="topProductsTable">
               <thead>
                 <tr>
-                  <th style="width: 45px;">Rank</th>
+                  <th style="width: 42px;">Rank</th>
                   <th>Product Name</th>
                   <th>Category</th>
                   <th style="text-align: right;">Orders</th>
@@ -401,35 +437,39 @@
           <div class="chart-header">
             <div class="chart-title-area">
               <h3 class="chart-title">
-                <i data-lucide="truck" style="color: var(--accent-cyan); width: 18px; height: 18px;"></i>
+                <i data-lucide="truck" style="color: var(--pbi-violet); width: 16px; height: 16px;"></i>
                 Shipping Logistics Matrix
               </h3>
-              <p class="chart-subtitle">Speed, Freight Cost, & Net Margin After Shipping</p>
+              <p class="chart-subtitle">Speed, Freight Cost, &amp; Net Margin After Shipping</p>
+            </div>
+            <div class="pbi-visual-actions">
+              <button class="pbi-icon-btn" title="Focus mode"><i data-lucide="maximize-2" style="width: 13px; height: 13px;"></i></button>
+              <button class="pbi-icon-btn" title="More options"><i data-lucide="more-horizontal" style="width: 13px; height: 13px;"></i></button>
             </div>
           </div>
-          <div class="chart-body" style="min-height: 320px;">
+          <div class="chart-body" style="min-height: 310px;">
             <canvas id="shippingChart"></canvas>
           </div>
         </div>
       </div>
 
-      <!-- Section: What-If Strategic Profit Simulator -->
-      <section class="simulator-box">
+      <!-- Section: What-If Strategic Profit Simulator (Parameter Analysis) -->
+      <section id="sectionSimulator" class="simulator-box">
         <div class="simulator-controls">
           <div>
-            <h3 style="font-size: 1.05rem; font-weight: 700; color: #ffffff; display: flex; align-items: center; gap: 0.5rem;">
-              <i data-lucide="sliders" style="color: var(--accent-primary); width: 18px; height: 18px;"></i>
-              Executive Strategy Simulator (What-If Analysis)
+            <h3 style="font-size: 1rem; font-weight: 700; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;">
+              <i data-lucide="sliders" style="color: var(--pbi-blue); width: 16px; height: 16px;"></i>
+              Power BI What-If Scenario Analysis (Parameter Simulation)
             </h3>
             <p style="font-size: 0.775rem; color: var(--text-muted); margin-top: 0.2rem;">
-              Simulate strategic policy changes on the dataset to estimate profit recapture and margin expansion.
+              Simulate strategic policy parameters on the dataset to model profit recapture and margin expansion.
             </p>
           </div>
 
           <div class="slider-group">
             <div class="slider-header">
               <span>Cap Max Allowed Discount</span>
-              <span id="sliderDiscountVal" style="font-family: 'JetBrains Mono', monospace; color: var(--accent-primary-light);">25%</span>
+              <span id="sliderDiscountVal" style="color: var(--pbi-blue); font-weight: 700;">25%</span>
             </div>
             <input type="range" id="simDiscountRange" class="custom-range" min="15" max="50" step="5" value="25">
             <div style="display: flex; justify-content: space-between; font-size: 0.675rem; color: var(--text-muted);">
@@ -442,7 +482,7 @@
           <div class="slider-group">
             <div class="slider-header">
               <span>Return Rate Mitigation</span>
-              <span id="sliderReturnVal" style="font-family: 'JetBrains Mono', monospace; color: var(--accent-emerald);">20% Reduction</span>
+              <span id="sliderReturnVal" style="color: var(--pbi-green); font-weight: 700;">20% Reduction</span>
             </div>
             <input type="range" id="simReturnRange" class="custom-range" min="0" max="50" step="5" value="20">
             <div style="display: flex; justify-content: space-between; font-size: 0.675rem; color: var(--text-muted);">
@@ -454,37 +494,41 @@
         </div>
 
         <div class="simulator-outcome">
-          <div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.05em;">
+          <div style="font-size: 0.725rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.05em;">
             Projected Impact on Bottomline
           </div>
           <div class="outcome-gain" id="simProfitGain">+$54,847.48</div>
-          <p style="font-size: 0.775rem; color: var(--text-secondary);">
+          <p style="font-size: 0.75rem; color: var(--text-secondary);">
             Estimated incremental net profit unlocked by eliminating unprofitable discount tiers and recovering return logistics costs.
           </p>
           <hr style="border: none; border-top: 1px solid var(--border-subtle); margin: 0.25rem 0;">
           <div class="outcome-stat">
             <span style="color: var(--text-muted);">Projected Net Profit:</span>
-            <strong id="simProjectedProfit" style="font-family: 'JetBrains Mono', monospace;">$1,492,485.79</strong>
+            <strong id="simProjectedProfit">$1,492,485.79</strong>
           </div>
           <div class="outcome-stat">
             <span style="color: var(--text-muted);">New Profit Margin:</span>
-            <strong id="simProjectedMargin" style="font-family: 'JetBrains Mono', monospace; color: var(--accent-emerald);">28.24% (+1.04%)</strong>
+            <strong id="simProjectedMargin" style="color: var(--pbi-green);">28.24% (+1.04%)</strong>
           </div>
         </div>
       </section>
 
-      <!-- Section: Data Explorer (Filtered Transactions Table) -->
-      <section class="chart-card col-12">
+      <!-- Section: Data Explorer (Filtered Transactions Matrix Table) -->
+      <section id="sectionDataExplorer" class="chart-card col-12">
         <div class="chart-header">
           <div class="chart-title-area">
             <h3 class="chart-title">
-              <i data-lucide="database" style="color: var(--accent-primary); width: 18px; height: 18px;"></i>
-              Transaction Data Explorer
+              <i data-lucide="database" style="color: var(--pbi-blue); width: 16px; height: 16px;"></i>
+              Transaction Data Explorer (Grid Visual)
             </h3>
             <p class="chart-subtitle">Granular row-level transactions calculated directly from ecommerce_sales_dataset.csv</p>
           </div>
-          <div class="chart-controls">
-            <span style="font-size: 0.775rem; color: var(--text-muted);" id="tableRowsInfo">Showing 1-10 of 10,000</span>
+          <div style="display: flex; align-items: center; gap: 0.85rem;">
+            <span style="font-size: 0.75rem; color: var(--text-muted);" id="tableRowsInfo">Showing 1-10 of 10,000</span>
+            <div class="pbi-visual-actions">
+              <button class="pbi-icon-btn" title="Focus mode"><i data-lucide="maximize-2" style="width: 13px; height: 13px;"></i></button>
+              <button class="pbi-icon-btn" title="More options"><i data-lucide="more-horizontal" style="width: 13px; height: 13px;"></i></button>
+            </div>
           </div>
         </div>
 
@@ -518,23 +562,58 @@
             Page <span id="currentPageNum" style="font-weight: 700; color: var(--text-primary);">1</span> of <span id="totalPageNum" style="font-weight: 700;">1000</span>
           </div>
           <div style="display: flex; gap: 0.4rem;">
-            <button id="btnPrevPage" class="pagination-btn"><i data-lucide="chevron-left" style="width: 14px; height: 14px; vertical-align: middle;"></i> Previous</button>
-            <button id="btnNextPage" class="pagination-btn">Next <i data-lucide="chevron-right" style="width: 14px; height: 14px; vertical-align: middle;"></i></button>
+            <button id="btnPrevPage" class="pagination-btn"><i data-lucide="chevron-left" style="width: 13px; height: 13px; vertical-align: middle;"></i> Previous</button>
+            <button id="btnNextPage" class="pagination-btn">Next <i data-lucide="chevron-right" style="width: 13px; height: 13px; vertical-align: middle;"></i></button>
           </div>
         </div>
       </section>
 
     </main>
 
+    <!-- Power BI Report Page Navigation Bar -->
+    <nav class="pbi-report-page-bar" aria-label="Power BI Report Navigation">
+      <div class="pbi-page-tabs-container" id="pbiPageTabs">
+        <button class="pbi-page-tab active" data-target="sectionExecutive">
+          <i data-lucide="layout-dashboard" style="width: 12px; height: 12px;"></i>
+          Executive Overview
+        </button>
+        <button class="pbi-page-tab" data-target="sectionTrajectory">
+          <i data-lucide="trending-up" style="width: 12px; height: 12px;"></i>
+          Velocity &amp; Status
+        </button>
+        <button class="pbi-page-tab" data-target="sectionCategoryRegion">
+          <i data-lucide="layers" style="width: 12px; height: 12px;"></i>
+          Category &amp; Regional
+        </button>
+        <button class="pbi-page-tab" data-target="sectionPricingRisk">
+          <i data-lucide="alert-triangle" style="width: 12px; height: 12px;"></i>
+          Discount Audit
+        </button>
+        <button class="pbi-page-tab" data-target="sectionSimulator">
+          <i data-lucide="sliders" style="width: 12px; height: 12px;"></i>
+          What-If Simulator
+        </button>
+        <button class="pbi-page-tab" data-target="sectionDataExplorer">
+          <i data-lucide="database" style="width: 12px; height: 12px;"></i>
+          Data Explorer
+        </button>
+      </div>
+      <div class="pbi-page-status">
+        <span><i data-lucide="check-circle-2" style="width: 12px; height: 12px; color: var(--pbi-green);"></i> Interactive Report</span>
+        <span>|</span>
+        <span id="pbiPageNumber">Page 1 of 6</span>
+      </div>
+    </nav>
+
     <!-- Footer -->
     <footer class="dashboard-footer">
       <div>
-        <strong>OmniViz Analytics Engine</strong> &mdash; 100% Calculated dynamically from <code>ecommerce_sales_dataset.csv</code> (10,000 Transactions).
+        <strong>OmniViz Analytics Engine</strong> &mdash; Calculated dynamically from <code>ecommerce_sales_dataset.csv</code> (10,000 Transactions).
       </div>
       <div class="footer-tags">
         <span class="footer-tag">Zero Mock Data</span>
         <span class="footer-tag">Sub-millisecond Filtering</span>
-        <span class="footer-tag">University Hackathon Benchmark</span>
+        <span class="footer-tag">Power BI Standard</span>
       </div>
     </footer>
   </div>

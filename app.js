@@ -201,6 +201,27 @@
     // Report PDF / Print
     const printBtn = document.getElementById('printReportBtn');
     if (printBtn) printBtn.addEventListener('click', () => window.print());
+
+    // Power BI Report Page Navigation Tabs
+    const pageTabs = document.querySelectorAll('.pbi-page-tab');
+    pageTabs.forEach((tab, idx) => {
+      tab.addEventListener('click', () => {
+        pageTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const targetId = tab.getAttribute('data-target');
+        const targetEl = document.getElementById(targetId);
+        if (targetEl) {
+          targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        const pageNum = document.getElementById('pbiPageNumber');
+        if (pageNum) pageNum.textContent = `Page ${idx + 1} of ${pageTabs.length}`;
+      });
+    });
+
+    // Configure global Chart.js defaults for Power BI font
+    if (window.Chart) {
+      Chart.defaults.font.family = "'Segoe UI', wf_segoe-ui_normal, -apple-system, BlinkMacSystemFont, sans-serif";
+    }
   }
 
   function setTopProductSort(mode) {
@@ -526,19 +547,19 @@
     grid.innerHTML = cardsHtml;
   }
 
-  // --- Chart.js Theme Colors Configuration ---
+  // --- Chart.js Theme Colors Configuration (Power BI Standard) ---
   function getChartThemeColors() {
     const isDark = currentTheme === 'dark';
     return {
-      textColor: isDark ? '#94a3b8' : '#475569',
-      gridColor: isDark ? 'rgba(255, 255, 255, 0.06)' : 'rgba(0, 0, 0, 0.06)',
-      tooltipBg: isDark ? 'rgba(16, 24, 40, 0.88)' : 'rgba(255, 255, 255, 0.92)',
-      tooltipText: isDark ? '#f8fafc' : '#0f172a',
-      tooltipBorder: isDark ? 'rgba(255, 255, 255, 0.18)' : 'rgba(0, 0, 0, 0.12)'
+      textColor: isDark ? '#C8C6C4' : '#605E5C',
+      gridColor: isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.08)',
+      tooltipBg: isDark ? '#252423' : '#FFFFFF',
+      tooltipText: isDark ? '#F3F2F1' : '#252423',
+      tooltipBorder: isDark ? '#3B3A39' : '#E1DFDD'
     };
   }
 
-  // Common Tooltip Config
+  // Common Tooltip Config (Power BI Fluent Box)
   function getStandardTooltip(colors, isCurrency = true) {
     return {
       backgroundColor: colors.tooltipBg,
@@ -546,10 +567,12 @@
       bodyColor: colors.tooltipText,
       borderColor: colors.tooltipBorder,
       borderWidth: 1,
-      cornerRadius: 12,
-      padding: 12,
-      boxPadding: 6,
+      cornerRadius: 2,
+      padding: 10,
+      boxPadding: 4,
       usePointStyle: true,
+      titleFont: { family: 'Segoe UI', size: 12, weight: '700' },
+      bodyFont: { family: 'Segoe UI', size: 11, weight: '500' },
       callbacks: {
         label: function(context) {
           const label = context.dataset.label || '';
@@ -623,12 +646,12 @@
 
     // Gradients
     const revGradient = ctx.createLinearGradient(0, 0, 0, 300);
-    revGradient.addColorStop(0, 'rgba(99, 102, 241, 0.35)');
-    revGradient.addColorStop(1, 'rgba(99, 102, 241, 0.0)');
+    revGradient.addColorStop(0, 'rgba(17, 141, 255, 0.22)');
+    revGradient.addColorStop(1, 'rgba(17, 141, 255, 0.0)');
 
     const profitGradient = ctx.createLinearGradient(0, 0, 0, 300);
-    profitGradient.addColorStop(0, 'rgba(16, 185, 129, 0.35)');
-    profitGradient.addColorStop(1, 'rgba(16, 185, 129, 0.0)');
+    profitGradient.addColorStop(0, 'rgba(16, 124, 65, 0.22)');
+    profitGradient.addColorStop(1, 'rgba(16, 124, 65, 0.0)');
 
     timeChart = new Chart(ctx, {
       type: 'line',
@@ -638,10 +661,10 @@
           {
             label: 'Revenue',
             data: revData,
-            borderColor: '#6366f1',
+            borderColor: '#118DFF',
             backgroundColor: revGradient,
-            borderWidth: 2.5,
-            tension: 0.3,
+            borderWidth: 2.2,
+            tension: 0.2,
             fill: true,
             pointRadius: labels.length > 24 ? 1.5 : 3.5,
             pointHoverRadius: 6,
@@ -650,10 +673,10 @@
           {
             label: 'Profit',
             data: profitData,
-            borderColor: '#10b981',
+            borderColor: '#107C41',
             backgroundColor: profitGradient,
-            borderWidth: 2.5,
-            tension: 0.3,
+            borderWidth: 2.2,
+            tension: 0.2,
             fill: true,
             pointRadius: labels.length > 24 ? 1.5 : 3.5,
             pointHoverRadius: 6,
@@ -662,7 +685,7 @@
           {
             label: 'Profit Margin %',
             data: marginData,
-            borderColor: '#06b6d4',
+            borderColor: '#D9B300',
             borderWidth: 2,
             borderDash: [4, 4],
             pointRadius: 0,
@@ -679,18 +702,30 @@
         plugins: {
           legend: {
             position: 'top',
-            labels: { color: colors.textColor, font: { family: 'Plus Jakarta Sans', size: 11, weight: '600' } }
+            labels: { color: colors.textColor, font: { family: 'Segoe UI', size: 11, weight: '600' } }
           },
           tooltip: getStandardTooltip(colors)
         },
         scales: {
           x: {
+            title: {
+              display: true,
+              text: timeMode === 'yearly' ? 'Year' : timeMode === 'quarterly' ? 'Quarter' : 'Timeline (Month)',
+              color: colors.textColor,
+              font: { family: 'Segoe UI', size: 11, weight: '600' }
+            },
             grid: { color: colors.gridColor },
             ticks: { color: colors.textColor, maxTicksLimit: 14, font: { size: 10 } }
           },
           y: {
             type: 'linear',
             position: 'left',
+            title: {
+              display: true,
+              text: 'Revenue & Profit (USD $)',
+              color: colors.textColor,
+              font: { family: 'Segoe UI', size: 11, weight: '600' }
+            },
             grid: { color: colors.gridColor },
             ticks: {
               color: colors.textColor,
@@ -701,6 +736,12 @@
           y1: {
             type: 'linear',
             position: 'right',
+            title: {
+              display: true,
+              text: 'Profit Margin (%)',
+              color: colors.textColor,
+              font: { family: 'Segoe UI', size: 11, weight: '600' }
+            },
             grid: { drawOnChartArea: false },
             ticks: {
               color: colors.textColor,
@@ -732,7 +773,7 @@
     const totalOrders = filteredData.length;
     const baseLabels = ['Delivered', 'Processing', 'Returned', 'Cancelled'];
     const counts = baseLabels.map(l => statusMap[l]);
-    const bgColors = ['#10b981', '#6366f1', '#f59e0b', '#f43f5e'];
+    const bgColors = ['#107C41', '#118DFF', '#F2C811', '#D64550'];
 
     // Formatted labels with visible percentages directly in the legend!
     const legendLabels = baseLabels.map(l => {
@@ -785,9 +826,9 @@
         datasets: [{
           data: counts,
           backgroundColor: bgColors,
-          borderColor: currentTheme === 'dark' ? 'rgba(16, 24, 40, 0.9)' : '#ffffff',
-          borderWidth: 2.5,
-          hoverOffset: 6
+          borderColor: currentTheme === 'dark' ? '#252423' : '#ffffff',
+          borderWidth: 2,
+          hoverOffset: 4
         }]
       },
       options: {
@@ -799,7 +840,7 @@
             position: 'bottom',
             labels: {
               color: colors.textColor,
-              font: { family: 'Plus Jakarta Sans', size: 10.5, weight: '600' },
+              font: { family: 'Segoe UI', size: 10.5, weight: '600' },
               boxWidth: 10,
               padding: 10
             }
@@ -861,14 +902,14 @@
           {
             label: 'Revenue',
             data: revs,
-            backgroundColor: '#6366f1',
-            borderRadius: 6
+            backgroundColor: '#118DFF',
+            borderRadius: 2
           },
           {
             label: 'Profit',
             data: profits,
-            backgroundColor: '#10b981',
-            borderRadius: 6
+            backgroundColor: '#107C41',
+            borderRadius: 2
           }
         ]
       },
@@ -878,7 +919,7 @@
         plugins: {
           legend: {
             position: 'top',
-            labels: { color: colors.textColor, font: { family: 'Plus Jakarta Sans', size: 11, weight: '600' } }
+            labels: { color: colors.textColor, font: { family: 'Segoe UI', size: 11, weight: '600' } }
           },
           tooltip: {
             ...getStandardTooltip(colors),
@@ -898,10 +939,22 @@
         },
         scales: {
           x: {
+            title: {
+              display: true,
+              text: 'Product Category',
+              color: colors.textColor,
+              font: { family: 'Segoe UI', size: 11, weight: '600' }
+            },
             grid: { display: false },
-            ticks: { color: colors.textColor, font: { size: 10 } }
+            ticks: { color: colors.textColor, font: { size: 10.5 } }
           },
           y: {
+            title: {
+              display: true,
+              text: 'Revenue & Net Profit (USD $)',
+              color: colors.textColor,
+              font: { family: 'Segoe UI', size: 11, weight: '600' }
+            },
             grid: { color: colors.gridColor },
             ticks: {
               color: colors.textColor,
@@ -946,14 +999,14 @@
           {
             label: 'Revenue',
             data: revs,
-            backgroundColor: '#06b6d4',
-            borderRadius: 6
+            backgroundColor: '#118DFF',
+            borderRadius: 2
           },
           {
             label: 'Profit',
             data: profits,
-            backgroundColor: '#a855f7',
-            borderRadius: 6
+            backgroundColor: '#E66C37',
+            borderRadius: 2
           }
         ]
       },
@@ -963,7 +1016,7 @@
         plugins: {
           legend: {
             position: 'top',
-            labels: { color: colors.textColor, font: { family: 'Plus Jakarta Sans', size: 11, weight: '600' } }
+            labels: { color: colors.textColor, font: { family: 'Segoe UI', size: 11, weight: '600' } }
           },
           tooltip: {
             ...getStandardTooltip(colors),
@@ -984,10 +1037,22 @@
         },
         scales: {
           x: {
+            title: {
+              display: true,
+              text: 'Geographic Region',
+              color: colors.textColor,
+              font: { family: 'Segoe UI', size: 11, weight: '600' }
+            },
             grid: { display: false },
-            ticks: { color: colors.textColor, font: { size: 10 } }
+            ticks: { color: colors.textColor, font: { size: 10.5 } }
           },
           y: {
+            title: {
+              display: true,
+              text: 'Revenue & Net Profit (USD $)',
+              color: colors.textColor,
+              font: { family: 'Segoe UI', size: 11, weight: '600' }
+            },
             grid: { color: colors.gridColor },
             ticks: {
               color: colors.textColor,
@@ -1027,8 +1092,8 @@
     const margins = tiers.map(t => discMap[t].rev > 0 ? (discMap[t].profit / discMap[t].rev) * 100 : 0);
     const lossCounts = tiers.map(t => discMap[t].lossOrders);
 
-    // Color bars: positive profit gets emerald/indigo, negative gets bright rose/red
-    const barColors = profits.map(p => p >= 0 ? 'rgba(99, 102, 241, 0.8)' : 'rgba(244, 63, 94, 0.85)');
+    // Color bars: positive profit gets Power BI blue, negative gets Power BI red
+    const barColors = profits.map(p => p >= 0 ? '#118DFF' : '#D64550');
 
     if (discountChart) discountChart.destroy();
 
@@ -1042,17 +1107,17 @@
             label: 'Net Profit ($)',
             data: profits,
             backgroundColor: barColors,
-            borderRadius: 6,
+            borderRadius: 2,
             yAxisID: 'y'
           },
           {
             type: 'line',
             label: 'Profit Margin %',
             data: margins,
-            borderColor: '#10b981',
-            borderWidth: 2.5,
-            pointRadius: 4,
-            pointBackgroundColor: '#10b981',
+            borderColor: '#107C41',
+            borderWidth: 2.2,
+            pointRadius: 3.5,
+            pointBackgroundColor: '#107C41',
             tension: 0.2,
             yAxisID: 'y1'
           },
@@ -1060,11 +1125,11 @@
             type: 'line',
             label: 'Loss-Making Orders Count',
             data: lossCounts,
-            borderColor: '#f43f5e',
+            borderColor: '#D83B01',
             borderWidth: 2,
-            borderDash: [5, 5],
-            pointRadius: 4,
-            pointBackgroundColor: '#f43f5e',
+            borderDash: [4, 4],
+            pointRadius: 3.5,
+            pointBackgroundColor: '#D83B01',
             tension: 0.2,
             yAxisID: 'y2'
           }
@@ -1077,13 +1142,18 @@
         plugins: {
           legend: {
             position: 'top',
-            labels: { color: colors.textColor, font: { family: 'Plus Jakarta Sans', size: 11, weight: '600' } }
+            labels: { color: colors.textColor, font: { family: 'Segoe UI', size: 11, weight: '600' } }
           },
           tooltip: getStandardTooltip(colors)
         },
         scales: {
           x: {
-            title: { display: true, text: 'Discount Tier Rate', color: colors.textColor, font: { size: 11, weight: '600' } },
+            title: {
+              display: true,
+              text: 'Discount Tier Rate (%)',
+              color: colors.textColor,
+              font: { family: 'Segoe UI', size: 11, weight: '600' }
+            },
             grid: { display: false },
             ticks: { color: colors.textColor }
           },
@@ -1091,7 +1161,12 @@
             type: 'linear',
             position: 'left',
             grid: { color: colors.gridColor },
-            title: { display: true, text: 'Net Profit ($)', color: colors.textColor, font: { size: 10 } },
+            title: {
+              display: true,
+              text: 'Net Profit (USD $)',
+              color: colors.textColor,
+              font: { family: 'Segoe UI', size: 11, weight: '600' }
+            },
             ticks: {
               color: colors.textColor,
               callback: val => val >= 1000 || val <= -1000 ? '$' + (val / 1000).toFixed(0) + 'k' : '$' + val
@@ -1101,7 +1176,12 @@
             type: 'linear',
             position: 'right',
             grid: { drawOnChartArea: false },
-            title: { display: true, text: 'Margin %', color: colors.textColor, font: { size: 10 } },
+            title: {
+              display: true,
+              text: 'Profit Margin (%)',
+              color: colors.textColor,
+              font: { family: 'Segoe UI', size: 11, weight: '600' }
+            },
             ticks: {
               color: colors.textColor,
               callback: val => val.toFixed(0) + '%'
@@ -1148,14 +1228,14 @@
           {
             label: 'Revenue',
             data: revs,
-            backgroundColor: '#f59e0b',
-            borderRadius: 6
+            backgroundColor: '#118DFF',
+            borderRadius: 2
           },
           {
             label: 'Profit',
             data: profits,
-            backgroundColor: '#10b981',
-            borderRadius: 6
+            backgroundColor: '#F2C811',
+            borderRadius: 2
           }
         ]
       },
@@ -1165,7 +1245,7 @@
         plugins: {
           legend: {
             position: 'top',
-            labels: { color: colors.textColor, font: { family: 'Plus Jakarta Sans', size: 11, weight: '600' } }
+            labels: { color: colors.textColor, font: { family: 'Segoe UI', size: 11, weight: '600' } }
           },
           tooltip: {
             ...getStandardTooltip(colors),
@@ -1186,13 +1266,26 @@
         },
         scales: {
           x: {
+            title: {
+              display: true,
+              text: 'Customer Segment',
+              color: colors.textColor,
+              font: { family: 'Segoe UI', size: 11, weight: '600' }
+            },
             grid: { display: false },
-            ticks: { color: colors.textColor }
+            ticks: { color: colors.textColor, font: { size: 10.5 } }
           },
           y: {
+            title: {
+              display: true,
+              text: 'Revenue & Profit (USD $)',
+              color: colors.textColor,
+              font: { family: 'Segoe UI', size: 11, weight: '600' }
+            },
             grid: { color: colors.gridColor },
             ticks: {
               color: colors.textColor,
+              font: { size: 10 },
               callback: val => '$' + (val / 1000).toFixed(0) + 'k'
             }
           }
@@ -1238,15 +1331,15 @@
           {
             label: 'Avg Shipping Days (Speed)',
             data: avgDays,
-            backgroundColor: '#06b6d4',
-            borderRadius: 6,
+            backgroundColor: '#118DFF',
+            borderRadius: 2,
             yAxisID: 'y'
           },
           {
             label: 'Net Margin % (After Freight)',
             data: netMargins,
-            backgroundColor: '#8b5cf6',
-            borderRadius: 6,
+            backgroundColor: '#744EC2',
+            borderRadius: 2,
             yAxisID: 'y1'
           }
         ]
@@ -1257,7 +1350,7 @@
         plugins: {
           legend: {
             position: 'top',
-            labels: { color: colors.textColor, font: { family: 'Plus Jakarta Sans', size: 11, weight: '600' } }
+            labels: { color: colors.textColor, font: { family: 'Segoe UI', size: 11, weight: '600' } }
           },
           tooltip: {
             ...getStandardTooltip(colors, false),
@@ -1273,20 +1366,36 @@
         },
         scales: {
           x: {
+            title: {
+              display: true,
+              text: 'Shipping Method / Delivery Mode',
+              color: colors.textColor,
+              font: { family: 'Segoe UI', size: 11, weight: '600' }
+            },
             grid: { display: false },
-            ticks: { color: colors.textColor }
+            ticks: { color: colors.textColor, font: { size: 10.5 } }
           },
           y: {
             type: 'linear',
             position: 'left',
-            title: { display: true, text: 'Days', color: colors.textColor, font: { size: 10 } },
+            title: {
+              display: true,
+              text: 'Avg Delivery Turnaround (Days)',
+              color: colors.textColor,
+              font: { family: 'Segoe UI', size: 11, weight: '600' }
+            },
             grid: { color: colors.gridColor },
             ticks: { color: colors.textColor }
           },
           y1: {
             type: 'linear',
             position: 'right',
-            title: { display: true, text: 'Net Margin %', color: colors.textColor, font: { size: 10 } },
+            title: {
+              display: true,
+              text: 'Net Margin After Freight (%)',
+              color: colors.textColor,
+              font: { family: 'Segoe UI', size: 11, weight: '600' }
+            },
             grid: { drawOnChartArea: false },
             ticks: { color: colors.textColor, callback: val => val + '%' }
           }
@@ -1454,10 +1563,10 @@
           <td style="text-align: right; font-family: 'JetBrains Mono', monospace;">${discBadge}</td>
           <td style="text-align: right; font-family: 'JetBrains Mono', monospace; font-weight: 600;">${fmtCurrency(r.Revenue)}</td>
           <td style="text-align: right; font-family: 'JetBrains Mono', monospace; color: var(--text-muted);">${fmtCurrency(r.Cost)}</td>
-          <td style="text-align: right; font-family: 'JetBrains Mono', monospace; font-weight: 700; color: ${r.Profit >= 0 ? '#10b981' : '#f43f5e'};">
+          <td style="text-align: right; font-family: inherit; font-variant-numeric: tabular-nums; font-weight: 700; color: ${r.Profit >= 0 ? 'var(--pbi-green)' : 'var(--pbi-red)'};">
             ${fmtCurrency(r.Profit)}
           </td>
-          <td><span style="font-size: 0.75rem; color: var(--accent-cyan);">${r.Shipping_Method} (${r.Shipping_Days}d)</span></td>
+          <td><span style="font-size: 0.75rem; color: var(--pbi-blue); font-weight: 600;">${r.Shipping_Method} (${r.Shipping_Days}d)</span></td>
           <td><span class="status-badge ${statusClass}">${r.Order_Status}</span></td>
         </tr>
       `;

@@ -1,105 +1,126 @@
 /* ==========================================================================
-   OmniViz E-Commerce Analytics Dashboard - Ultra Glassmorphism Design System
+   OmniViz Analytics - Microsoft Power BI Enterprise Theme Design System
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;500;600;700&display=swap');
 
 :root {
-  /* Ultra Dark Glass Theme (Default) */
-  --bg-primary: #070a12;
-  --bg-secondary: #0b1120;
-  
-  /* Glass Surfaces */
-  --glass-card: rgba(16, 24, 40, 0.55);
-  --glass-card-hover: rgba(22, 33, 56, 0.68);
-  --glass-nav: rgba(11, 17, 32, 0.72);
-  --glass-elevated: rgba(26, 38, 64, 0.6);
-  --glass-inner: rgba(255, 255, 255, 0.04);
-  
-  /* Frosted Glass Borders */
-  --border-glass: rgba(255, 255, 255, 0.12);
-  --border-glass-hover: rgba(255, 255, 255, 0.22);
-  --border-glass-subtle: rgba(255, 255, 255, 0.06);
-  --border-accent: rgba(99, 102, 241, 0.45);
+  /* Microsoft Power BI Core Brand Accents */
+  --pbi-yellow: #F2C811;           /* Signature Power BI Gold */
+  --pbi-yellow-hover: #E5BC0A;
+  --pbi-yellow-light: rgba(242, 200, 17, 0.15);
+  --pbi-yellow-glow: rgba(242, 200, 17, 0.35);
+
+  --pbi-blue: #118DFF;             /* Power BI Primary Visual Blue */
+  --pbi-navy: #12239E;             /* Power BI Deep Navy */
+  --pbi-orange: #E66C37;           /* Power BI Persimmon Orange */
+  --pbi-purple: #6B007B;           /* Power BI Purple */
+  --pbi-magenta: #E044A7;          /* Power BI Pink */
+  --pbi-violet: #744EC2;           /* Power BI Violet */
+  --pbi-teal: #00A9E0;             /* Power BI Teal */
+  --pbi-green: #107C41;            /* Microsoft Excel/PBI Profit Green */
+  --pbi-red: #D64550;              /* Power BI Negative/Loss Red */
+  --pbi-crimson: #D83B01;          /* High Alert Crimson */
+  --pbi-amber: #FFB900;            /* Warning Amber */
+
+  /* Power BI Executive Dark Theme (Default) */
+  --bg-primary: #181716;           /* Report Canvas Dark */
+  --bg-secondary: #201F1E;         /* Panel / Slicer Section */
+  --bg-canvas: #181716;
+  --bg-card: #252423;              /* Power BI Visual Card Background */
+  --bg-card-hover: #2B2A29;
+  --bg-elevated: #2D2C2B;          /* Elevated / Dropdown Surface */
+  --bg-nav: #1B1A19;               /* Power BI Ribbon / Action Bar */
+  --bg-header-ribbon: #11100F;
+
+  /* Fluent Borders */
+  --border-glass: #3B3A39;
+  --border-subtle: #323130;
+  --border-focus: #F2C811;
+  --border-accent: rgba(242, 200, 17, 0.5);
 
   /* Typography */
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
-  --text-inverse: #070a12;
+  --text-primary: #F3F2F1;
+  --text-secondary: #C8C6C4;
+  --text-muted: #8A8886;
+  --text-inverse: #181716;
 
-  /* Brand Accents */
-  --accent-primary: #6366f1;       /* Electric Indigo */
-  --accent-primary-light: #818cf8;
-  --accent-primary-glow: rgba(99, 102, 241, 0.35);
+  /* Aliases for compatibility with existing code */
+  --accent-primary: #118DFF;
+  --accent-primary-light: #50A9FF;
+  --accent-primary-glow: rgba(17, 141, 255, 0.25);
+  --accent-cyan: #00A9E0;
+  --accent-emerald: #107C41;
+  --accent-emerald-glow: rgba(16, 124, 65, 0.25);
+  --accent-amber: #F2C811;
+  --accent-amber-glow: rgba(242, 200, 17, 0.25);
+  --accent-rose: #D64550;
+  --accent-rose-glow: rgba(214, 69, 80, 0.25);
+  --accent-purple: #744EC2;
+  --bg-surface-elevated: #2D2C2B;
 
-  --accent-cyan: #06b6d4;          /* Cyber Cyan */
-  --accent-cyan-glow: rgba(6, 182, 212, 0.3);
+  /* Power BI Shadows & Fluent Elevations */
+  --shadow-glass: 0 1.6px 3.6px 0 rgba(0, 0, 0, 0.35), 0 0.3px 0.9px 0 rgba(0, 0, 0, 0.28);
+  --shadow-glass-hover: 0 3.2px 7.2px 0 rgba(0, 0, 0, 0.45), 0 0.6px 1.8px 0 rgba(0, 0, 0, 0.38);
+  --shadow-inner-light: none;
+  --shadow-glow: 0 0 14px var(--pbi-yellow-glow);
 
-  --accent-emerald: #10b981;       /* Profit Emerald */
-  --accent-emerald-glow: rgba(16, 185, 129, 0.3);
-
-  --accent-amber: #f59e0b;         /* Warning Amber */
-  --accent-amber-glow: rgba(245, 158, 11, 0.3);
-
-  --accent-rose: #f43f5e;          /* Loss Rose */
-  --accent-rose-glow: rgba(244, 63, 94, 0.35);
-
-  --accent-purple: #a855f7;        /* Royalty Purple */
-  --accent-purple-glow: rgba(168, 85, 247, 0.3);
-
-  /* Glass Shadows & Highlights */
-  --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-  --shadow-glass-hover: 0 16px 48px -4px rgba(0, 0, 0, 0.6);
-  --shadow-inner-light: inset 0 1px 1px 0 rgba(255, 255, 255, 0.18);
-  --shadow-glow: 0 0 28px var(--accent-primary-glow);
-
-  /* Corner Radii */
-  --radius-xs: 8px;
-  --radius-sm: 12px;
-  --radius-md: 16px;
-  --radius-lg: 22px;
+  /* Microsoft Power BI Crisp Corners */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 4px;
+  --radius-lg: 4px;
   --radius-full: 9999px;
 
   /* Transitions */
-  --transition-fast: 160ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-normal: 260ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-bounce: 380ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-fast: 120ms ease;
+  --transition-normal: 200ms ease;
 }
 
-/* Light Theme Variables (Pristine Frosted Crystal) */
+/* ==========================================================================
+   Power BI Light Report Canvas Theme
+   ========================================================================== */
 [data-theme="light"] {
-  --bg-primary: #f0f4f9;
-  --bg-secondary: #e2e8f0;
-  
-  --glass-card: rgba(255, 255, 255, 0.72);
-  --glass-card-hover: rgba(255, 255, 255, 0.88);
-  --glass-nav: rgba(255, 255, 255, 0.82);
-  --glass-elevated: rgba(241, 245, 249, 0.8);
-  --glass-inner: rgba(255, 255, 255, 0.4);
+  --bg-primary: #F3F2F1;           /* Signature Power BI Light Canvas */
+  --bg-secondary: #FAF9F8;
+  --bg-canvas: #F3F2F1;
+  --bg-card: #FFFFFF;              /* Crisp White Visual Tiles */
+  --bg-card-hover: #FFFFFF;
+  --bg-elevated: #F8F8F8;
+  --bg-nav: #252423;               /* Top Action Bar stays dark slate like Power BI service */
+  --bg-header-ribbon: #1B1A19;
 
-  --border-glass: rgba(0, 0, 0, 0.08);
-  --border-glass-hover: rgba(0, 0, 0, 0.16);
-  --border-glass-subtle: rgba(0, 0, 0, 0.04);
-  --border-accent: rgba(99, 102, 241, 0.4);
+  --border-glass: #E1DFDD;         /* Fluent Grey Border */
+  --border-subtle: #EDEBE9;
+  --border-focus: #F2C811;
+  --border-accent: #C8C6C4;
 
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #94a3b8;
-  --text-inverse: #f8fafc;
+  --text-primary: #252423;         /* Power BI Dark Slate Body */
+  --text-secondary: #605E5C;
+  --text-muted: #797775;
+  --text-inverse: #FFFFFF;
 
-  --accent-primary-glow: rgba(99, 102, 241, 0.18);
-  --accent-cyan-glow: rgba(6, 182, 212, 0.18);
-  --accent-emerald-glow: rgba(16, 185, 129, 0.18);
-  --accent-amber-glow: rgba(245, 158, 11, 0.18);
-  --accent-rose-glow: rgba(244, 63, 94, 0.18);
+  --accent-primary: #118DFF;
+  --accent-primary-light: #0078D4;
+  --accent-primary-glow: rgba(17, 141, 255, 0.15);
+  --accent-cyan: #008272;
+  --accent-emerald: #107C41;
+  --accent-emerald-glow: rgba(16, 124, 65, 0.15);
+  --accent-amber: #D9B300;
+  --accent-amber-glow: rgba(217, 179, 0, 0.15);
+  --accent-rose: #D64550;
+  --accent-rose-glow: rgba(214, 69, 80, 0.15);
+  --accent-purple: #6B007B;
+  --bg-surface-elevated: #EDEBE9;
 
-  --shadow-glass: 0 8px 24px -2px rgba(99, 102, 241, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04);
-  --shadow-glass-hover: 0 16px 36px -4px rgba(99, 102, 241, 0.14), 0 6px 16px rgba(0, 0, 0, 0.06);
-  --shadow-inner-light: inset 0 1px 1px 0 rgba(255, 255, 255, 0.8);
+  --shadow-glass: 0 1.6px 3.6px 0 rgba(0, 0, 0, 0.1), 0 0.3px 0.9px 0 rgba(0, 0, 0, 0.08);
+  --shadow-glass-hover: 0 3.2px 7.2px 0 rgba(0, 0, 0, 0.14), 0 0.6px 1.8px 0 rgba(0, 0, 0, 0.1);
+  --shadow-inner-light: none;
 }
 
-/* Global Reset & Base */
+/* ==========================================================================
+   Global Reset & Base - Segoe UI & Power BI Standard
+   ========================================================================== */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -109,72 +130,22 @@
 }
 
 body {
-  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Segoe UI', wf_segoe-ui_normal, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  line-height: 1.5;
+  line-height: 1.4;
   overflow-x: hidden;
   min-height: 100vh;
   position: relative;
-  transition: background-color var(--transition-normal), color var(--transition-normal);
+  font-size: 13px;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
 }
 
-/* Dynamic Animated Background Ambient Mesh */
-.ambient-glow-1 {
-  position: fixed;
-  top: -10%;
-  left: 15%;
-  width: 55vw;
-  height: 45vh;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.22) 0%, rgba(99, 102, 241, 0) 70%);
-  filter: blur(90px);
-  pointer-events: none;
-  z-index: 0;
-  animation: floatOrb1 18s ease-in-out infinite alternate;
-}
-
-.ambient-glow-2 {
-  position: fixed;
-  top: 35%;
-  right: -8%;
-  width: 50vw;
-  height: 50vh;
-  background: radial-gradient(circle, rgba(6, 182, 212, 0.18) 0%, rgba(6, 182, 212, 0) 70%);
-  filter: blur(100px);
-  pointer-events: none;
-  z-index: 0;
-  animation: floatOrb2 22s ease-in-out infinite alternate;
-}
-
+/* Ambient glow disabled for authentic Power BI report look */
+.ambient-glow-1,
+.ambient-glow-2,
 .ambient-glow-3 {
-  position: fixed;
-  bottom: -15%;
-  left: 25%;
-  width: 60vw;
-  height: 45vh;
-  background: radial-gradient(circle, rgba(168, 85, 247, 0.16) 0%, rgba(168, 85, 247, 0) 70%);
-  filter: blur(110px);
-  pointer-events: none;
-  z-index: 0;
-  animation: floatOrb3 20s ease-in-out infinite alternate;
-}
-
-@keyframes floatOrb1 {
-  0% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(6vw, 8vh) scale(1.1); }
-  100% { transform: translate(-4vw, 4vh) scale(0.95); }
-}
-
-@keyframes floatOrb2 {
-  0% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(-8vw, -6vh) scale(1.08); }
-  100% { transform: translate(5vw, 6vh) scale(0.92); }
-}
-
-@keyframes floatOrb3 {
-  0% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(8vw, -7vh) scale(1.12); }
-  100% { transform: translate(-6vw, -3vh) scale(0.96); }
+  display: none !important;
 }
 
 /* App Layout Container */
@@ -186,17 +157,17 @@ body {
   min-height: 100vh;
 }
 
-/* Glassmorphic Top Navigation */
+/* ==========================================================================
+   Power BI Service Ribbon / Top Header
+   ========================================================================== */
 .top-nav {
   position: sticky;
   top: 0;
-  z-index: 50;
-  background: var(--glass-nav);
-  backdrop-filter: blur(24px) saturate(190%);
-  -webkit-backdrop-filter: blur(24px) saturate(190%);
-  border-bottom: 1px solid var(--border-glass);
-  box-shadow: var(--shadow-inner-light), 0 4px 20px rgba(0, 0, 0, 0.15);
-  padding: 0.85rem 2rem;
+  z-index: 100;
+  background: var(--bg-nav);
+  border-bottom: 2px solid var(--pbi-yellow);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  padding: 0.6rem 1.75rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -206,73 +177,70 @@ body {
 .brand-section {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.85rem;
 }
 
+/* Official Power BI Yellow Stepped Icon */
 .brand-icon-box {
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-sm);
-  background: linear-gradient(135deg, var(--accent-primary) 0%, #4338ca 100%);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  width: 36px;
+  height: 36px;
+  border-radius: 2px;
+  background: var(--pbi-yellow);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ffffff;
-  box-shadow: 0 0 20px var(--accent-primary-glow), var(--shadow-inner-light);
+  color: #11100F;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(242, 200, 17, 0.4);
+}
+
+.brand-icon-box i {
+  color: #11100F;
+  stroke-width: 2.4px;
 }
 
 .brand-title {
-  font-size: 1.35rem;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  background: linear-gradient(135deg, #ffffff 30%, #c7d2fe 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #FFFFFF;
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.55rem;
+  letter-spacing: -0.01em;
 }
 
 [data-theme="light"] .brand-title {
-  background: linear-gradient(135deg, #0f172a 30%, #4338ca 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #FFFFFF; /* Power BI top ribbon is always executive dark */
 }
 
 .badge-competition {
-  font-size: 0.675rem;
+  font-size: 0.65rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  padding: 0.25rem 0.65rem;
-  border-radius: var(--radius-full);
-  background: rgba(99, 102, 241, 0.2);
-  color: var(--accent-primary-light);
-  border: 1px solid var(--border-accent);
-  backdrop-filter: blur(8px);
-  box-shadow: 0 0 12px var(--accent-primary-glow);
+  letter-spacing: 0.06em;
+  padding: 0.15rem 0.55rem;
+  border-radius: 2px;
+  background: var(--pbi-yellow);
+  color: #11100F;
+  border: none;
 }
 
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.5rem;
 }
 
 .nav-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  background: var(--glass-card);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  color: var(--text-secondary);
-  border: 1px solid var(--border-glass);
-  box-shadow: var(--shadow-inner-light);
-  padding: 0.5rem 0.95rem;
-  border-radius: var(--radius-sm);
-  font-size: 0.825rem;
+  gap: 0.45rem;
+  background: rgba(255, 255, 255, 0.08);
+  color: #F3F2F1;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 0.4rem 0.85rem;
+  border-radius: 2px;
+  font-size: 0.775rem;
   font-weight: 600;
   cursor: pointer;
   transition: all var(--transition-fast);
@@ -280,75 +248,73 @@ body {
 }
 
 .nav-btn:hover {
-  background: var(--glass-card-hover);
-  color: var(--text-primary);
-  border-color: var(--border-glass-hover);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-inner-light), 0 6px 18px rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.16);
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.35);
+  transform: none;
 }
 
 .nav-btn.primary {
-  background: linear-gradient(135deg, var(--accent-primary) 0%, #4f46e5 100%);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 16px var(--accent-primary-glow), var(--shadow-inner-light);
+  background: var(--pbi-yellow);
+  color: #11100F;
+  border: 1px solid var(--pbi-yellow);
+  font-weight: 700;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 }
 
 .nav-btn.primary:hover {
-  filter: brightness(1.12);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px var(--accent-primary-glow), var(--shadow-inner-light);
+  background: var(--pbi-yellow-hover);
+  border-color: var(--pbi-yellow-hover);
+  color: #000000;
 }
 
-/* Glassmorphic Sticky Filter Bar */
+/* ==========================================================================
+   Power BI Slicers Bar (Filter Pane)
+   ========================================================================== */
 .filter-bar-container {
   position: sticky;
-  top: 65px;
-  z-index: 45;
-  background: var(--glass-nav);
-  backdrop-filter: blur(24px) saturate(190%);
-  -webkit-backdrop-filter: blur(24px) saturate(190%);
+  top: 50px;
+  z-index: 90;
+  background: var(--bg-card);
   border-bottom: 1px solid var(--border-glass);
-  box-shadow: var(--shadow-inner-light), 0 8px 24px rgba(0, 0, 0, 0.15);
-  padding: 0.85rem 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  padding: 0.7rem 1.75rem;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.6rem;
 }
 
 .filter-bar-main {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 0.85rem;
+  gap: 0.65rem;
 }
 
+/* Power BI Dropdown Slicer Appearance */
 .filter-group {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  background: var(--glass-card);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  gap: 0.45rem;
+  background: var(--bg-primary);
   border: 1px solid var(--border-glass);
-  box-shadow: var(--shadow-inner-light);
-  padding: 0.4rem 0.75rem;
-  border-radius: var(--radius-sm);
+  padding: 0.3rem 0.65rem;
+  border-radius: 2px;
   transition: all var(--transition-fast);
 }
 
-.filter-group:hover, .filter-group:focus-within {
-  border-color: var(--border-accent);
-  background: var(--glass-card-hover);
-  box-shadow: var(--shadow-inner-light), 0 0 16px var(--accent-primary-glow);
+.filter-group:hover, 
+.filter-group:focus-within {
+  border-color: var(--pbi-yellow);
+  box-shadow: 0 0 0 1px var(--pbi-yellow);
 }
 
 .filter-group label {
-  font-size: 0.75rem;
+  font-size: 0.725rem;
   font-weight: 700;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  text-transform: none;
+  letter-spacing: normal;
   display: flex;
   align-items: center;
   gap: 0.35rem;
@@ -359,7 +325,7 @@ body {
   background: transparent;
   color: var(--text-primary);
   border: none;
-  font-size: 0.825rem;
+  font-size: 0.8rem;
   font-weight: 600;
   font-family: inherit;
   outline: none;
@@ -368,27 +334,24 @@ body {
 }
 
 .filter-select option {
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-card);
   color: var(--text-primary);
 }
 
 .search-box {
   flex: 1;
-  min-width: 200px;
-  max-width: 320px;
+  min-width: 180px;
+  max-width: 280px;
   position: relative;
 }
 
 .search-input {
   width: 100%;
-  background: var(--glass-card);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: var(--bg-primary);
   border: 1px solid var(--border-glass);
-  box-shadow: var(--shadow-inner-light);
-  border-radius: var(--radius-sm);
-  padding: 0.5rem 0.85rem 0.5rem 2.2rem;
-  font-size: 0.825rem;
+  border-radius: 2px;
+  padding: 0.4rem 0.75rem 0.4rem 2rem;
+  font-size: 0.8rem;
   color: var(--text-primary);
   outline: none;
   font-family: inherit;
@@ -396,77 +359,74 @@ body {
 }
 
 .search-input:focus {
-  border-color: var(--accent-primary);
-  box-shadow: var(--shadow-inner-light), 0 0 18px var(--accent-primary-glow);
-  background: var(--glass-card-hover);
+  border-color: var(--pbi-yellow);
+  box-shadow: 0 0 0 1px var(--pbi-yellow);
 }
 
 .search-icon {
   position: absolute;
-  left: 0.75rem;
+  left: 0.65rem;
   top: 50%;
   transform: translateY(-50%);
   color: var(--text-muted);
   pointer-events: none;
 }
 
+/* Power BI Slicer Clear Filter Button */
 .btn-reset-filters {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  background: rgba(244, 63, 94, 0.15);
-  backdrop-filter: blur(12px);
-  color: #fb7185;
-  border: 1px solid rgba(244, 63, 94, 0.35);
-  box-shadow: var(--shadow-inner-light);
-  padding: 0.45rem 0.85rem;
-  border-radius: var(--radius-sm);
-  font-size: 0.775rem;
-  font-weight: 700;
+  gap: 0.35rem;
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-glass);
+  padding: 0.35rem 0.75rem;
+  border-radius: 2px;
+  font-size: 0.75rem;
+  font-weight: 600;
   cursor: pointer;
   transition: all var(--transition-fast);
 }
 
 .btn-reset-filters:hover {
-  background: rgba(244, 63, 94, 0.28);
-  border-color: rgba(244, 63, 94, 0.55);
-  box-shadow: 0 0 16px var(--accent-rose-glow);
-  transform: translateY(-1px);
+  background: rgba(214, 69, 80, 0.12);
+  color: var(--pbi-red);
+  border-color: var(--pbi-red);
 }
 
-/* Active Filter Chips */
+/* Slicer Active Summary / Breadcrumb bar */
 .active-chips-bar {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  font-size: 0.75rem;
+  gap: 0.45rem;
+  font-size: 0.725rem;
+  border-top: 1px dashed var(--border-subtle);
+  padding-top: 0.45rem;
 }
 
 .active-filter-label {
   color: var(--text-muted);
   font-weight: 600;
-  margin-right: 0.25rem;
+  margin-right: 0.2rem;
 }
 
 .filter-chip {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  background: var(--glass-card);
-  backdrop-filter: blur(12px);
+  gap: 0.35rem;
+  background: var(--bg-primary);
   border: 1px solid var(--border-glass);
-  box-shadow: var(--shadow-inner-light);
   color: var(--text-primary);
-  padding: 0.25rem 0.65rem;
-  border-radius: var(--radius-full);
-  font-size: 0.75rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: 2px;
+  font-size: 0.725rem;
   font-weight: 600;
   transition: all var(--transition-fast);
 }
 
 .filter-chip:hover {
-  border-color: var(--border-accent);
+  border-color: var(--pbi-yellow);
 }
 
 .chip-remove-btn {
@@ -474,208 +434,183 @@ body {
   display: flex;
   align-items: center;
   color: var(--text-muted);
-  transition: color var(--transition-fast);
 }
 
 .chip-remove-btn:hover {
-  color: var(--accent-rose);
+  color: var(--pbi-red);
 }
 
 .data-stats-pill {
   margin-left: auto;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.75rem;
+  font-size: 0.725rem;
   font-weight: 600;
   color: var(--text-secondary);
-  background: var(--glass-card);
-  backdrop-filter: blur(12px);
-  padding: 0.25rem 0.8rem;
-  border-radius: var(--radius-full);
+  background: var(--bg-primary);
+  padding: 0.18rem 0.6rem;
+  border-radius: 2px;
   border: 1px solid var(--border-glass);
-  box-shadow: var(--shadow-inner-light);
 }
 
-/* Dashboard Content Grid */
+/* ==========================================================================
+   Report Canvas & Content Grid
+   ========================================================================== */
 .dashboard-content {
-  padding: 1.75rem 2rem 3.5rem;
+  padding: 1.25rem 1.75rem 4rem;
   display: flex;
   flex-direction: column;
-  gap: 1.85rem;
+  gap: 1.25rem;
 }
 
-/* Executive Insights Glass Banner */
+/* ==========================================================================
+   Power BI Smart Narrative / Executive Insights Visual
+   ========================================================================== */
 .insights-banner {
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.12) 0%, rgba(6, 182, 212, 0.08) 50%, rgba(16, 185, 129, 0.1) 100%);
-  backdrop-filter: blur(24px) saturate(190%);
-  -webkit-backdrop-filter: blur(24px) saturate(190%);
-  border: 1px solid var(--border-accent);
-  border-radius: var(--radius-lg);
-  padding: 1.5rem 1.75rem;
-  box-shadow: var(--shadow-glass), var(--shadow-inner-light);
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  border-left: 4px solid var(--pbi-yellow);
+  border-radius: 2px;
+  padding: 1.15rem 1.4rem;
+  box-shadow: var(--shadow-glass);
   position: relative;
-  overflow: hidden;
 }
 
 .insights-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1.15rem;
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .insights-title {
-  font-size: 1.15rem;
-  font-weight: 800;
+  font-size: 1rem;
+  font-weight: 700;
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  color: #ffffff;
-  letter-spacing: -0.02em;
+  gap: 0.5rem;
+  color: var(--text-primary);
 }
 
-[data-theme="light"] .insights-title {
-  color: #0f172a;
+.insights-title i {
+  color: var(--pbi-yellow) !important;
 }
 
 .insights-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-  gap: 1.15rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0.85rem;
 }
 
 .insight-card {
-  background: var(--glass-card);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  background: var(--bg-primary);
   border: 1px solid var(--border-glass);
-  border-radius: var(--radius-md);
-  padding: 1.15rem;
+  border-radius: 2px;
+  padding: 0.85rem 1rem;
   display: flex;
-  gap: 0.95rem;
+  gap: 0.75rem;
   align-items: flex-start;
-  box-shadow: var(--shadow-inner-light), 0 4px 16px rgba(0, 0, 0, 0.2);
-  transition: all var(--transition-normal);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  transition: all var(--transition-fast);
 }
 
 .insight-card:hover {
-  transform: translateY(-3px);
-  background: var(--glass-card-hover);
-  border-color: var(--border-glass-hover);
-  box-shadow: var(--shadow-inner-light), var(--shadow-glass-hover);
+  border-color: var(--border-accent);
 }
 
 .insight-icon-wrapper {
-  width: 42px;
-  height: 42px;
-  border-radius: var(--radius-sm);
+  width: 32px;
+  height: 32px;
+  border-radius: 2px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: var(--shadow-inner-light);
 }
 
+.insight-card.danger { border-left: 3px solid var(--pbi-red); }
 .insight-card.danger .insight-icon-wrapper {
-  background: rgba(244, 63, 94, 0.2);
-  color: #fb7185;
-  box-shadow: 0 0 16px var(--accent-rose-glow), var(--shadow-inner-light);
+  background: rgba(214, 69, 80, 0.15);
+  color: var(--pbi-red);
 }
 
+.insight-card.success { border-left: 3px solid var(--pbi-green); }
 .insight-card.success .insight-icon-wrapper {
-  background: rgba(16, 185, 129, 0.2);
-  color: #34d399;
-  box-shadow: 0 0 16px var(--accent-emerald-glow), var(--shadow-inner-light);
+  background: rgba(16, 124, 65, 0.15);
+  color: var(--pbi-green);
 }
 
+.insight-card.primary { border-left: 3px solid var(--pbi-blue); }
 .insight-card.primary .insight-icon-wrapper {
-  background: rgba(99, 102, 241, 0.2);
-  color: #818cf8;
-  box-shadow: 0 0 16px var(--accent-primary-glow), var(--shadow-inner-light);
+  background: rgba(17, 141, 255, 0.15);
+  color: var(--pbi-blue);
 }
 
+.insight-card.warning { border-left: 3px solid var(--pbi-yellow); }
 .insight-card.warning .insight-icon-wrapper {
-  background: rgba(245, 158, 11, 0.2);
-  color: #fbbf24;
-  box-shadow: 0 0 16px var(--accent-amber-glow), var(--shadow-inner-light);
+  background: rgba(242, 200, 17, 0.18);
+  color: #D9A700;
+}
+
+[data-theme="dark"] .insight-card.warning .insight-icon-wrapper {
+  color: var(--pbi-yellow);
 }
 
 .insight-content h4 {
-  font-size: 0.885rem;
+  font-size: 0.825rem;
   font-weight: 700;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.25rem;
   color: var(--text-primary);
 }
 
 .insight-content p {
-  font-size: 0.795rem;
+  font-size: 0.775rem;
   color: var(--text-secondary);
-  line-height: 1.45;
+  line-height: 1.4;
 }
 
 .insight-tag {
   display: inline-block;
-  font-size: 0.675rem;
+  font-size: 0.65rem;
   font-weight: 700;
-  padding: 0.2rem 0.55rem;
-  border-radius: var(--radius-xs);
-  margin-top: 0.5rem;
+  padding: 0.12rem 0.45rem;
+  border-radius: 2px;
+  margin-top: 0.4rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: var(--shadow-inner-light);
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  color: var(--text-secondary);
 }
 
-.insight-card.danger .insight-tag {
-  background: rgba(244, 63, 94, 0.25);
-  color: #fb7185;
-}
-
-.insight-card.success .insight-tag {
-  background: rgba(16, 185, 129, 0.25);
-  color: #34d399;
-}
-
-.insight-card.primary .insight-tag {
-  background: rgba(99, 102, 241, 0.25);
-  color: #a5b4fc;
-}
-
-.insight-card.warning .insight-tag {
-  background: rgba(245, 158, 11, 0.25);
-  color: #fcd34d;
-}
-
-/* Glassmorphic KPI Cards Grid */
+/* ==========================================================================
+   Power BI Multi-Row & Single Value KPI Cards
+   ========================================================================== */
 .kpi-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 0.85rem;
 }
 
 .kpi-card {
-  background: var(--glass-card);
-  backdrop-filter: blur(20px) saturate(190%);
-  -webkit-backdrop-filter: blur(20px) saturate(190%);
+  background: var(--bg-card);
   border: 1px solid var(--border-glass);
-  border-radius: var(--radius-lg);
-  padding: 1.4rem 1.5rem;
+  border-radius: 2px;
+  padding: 1rem 1.15rem;
   position: relative;
-  overflow: hidden;
-  box-shadow: var(--shadow-glass), var(--shadow-inner-light);
-  transition: all var(--transition-normal);
+  box-shadow: var(--shadow-glass);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transition: all var(--transition-fast);
 }
 
 .kpi-card:hover {
-  transform: translateY(-4px);
-  background: var(--glass-card-hover);
-  border-color: var(--border-glass-hover);
-  box-shadow: var(--shadow-glass-hover), var(--shadow-inner-light);
+  border-color: var(--border-accent);
+  box-shadow: var(--shadow-glass-hover);
 }
 
+/* Power BI Top Accent Indicator Strip */
 .kpi-card::after {
   content: '';
   position: absolute;
@@ -683,95 +618,101 @@ body {
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, transparent, transparent);
-  transition: all var(--transition-normal);
 }
 
-.kpi-card.rev::after { background: linear-gradient(90deg, var(--accent-primary), var(--accent-cyan)); }
-.kpi-card.profit::after { background: linear-gradient(90deg, var(--accent-emerald), #059669); }
-.kpi-card.margin::after { background: linear-gradient(90deg, var(--accent-cyan), var(--accent-primary)); }
-.kpi-card.orders::after { background: linear-gradient(90deg, var(--accent-purple), #7c3aed); }
-.kpi-card.aov::after { background: linear-gradient(90deg, var(--accent-amber), #d97706); }
+.kpi-card.rev::after { background: var(--pbi-blue); }
+.kpi-card.profit::after { background: var(--pbi-green); }
+.kpi-card.margin::after { background: var(--pbi-yellow); }
+.kpi-card.orders::after { background: var(--pbi-navy); }
+.kpi-card.aov::after { background: var(--pbi-red); }
 
 .kpi-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 0.85rem;
+  margin-bottom: 0.4rem;
 }
 
 .kpi-label {
-  font-size: 0.8rem;
-  font-weight: 700;
+  font-size: 0.775rem;
+  font-weight: 600;
   color: var(--text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  text-transform: none;
+  letter-spacing: normal;
 }
 
 .kpi-icon-pill {
-  width: 36px;
-  height: 36px;
-  border-radius: var(--radius-sm);
+  width: 28px;
+  height: 28px;
+  border-radius: 2px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--glass-elevated);
+  background: var(--bg-primary);
   border: 1px solid var(--border-glass);
   color: var(--text-secondary);
-  box-shadow: var(--shadow-inner-light);
 }
 
+/* Prominent Power BI Callout Value */
 .kpi-value {
   font-size: 1.85rem;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--text-primary);
-  letter-spacing: -0.04em;
-  line-height: 1.15;
-  margin-bottom: 0.6rem;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  line-height: 1.2;
+  margin-bottom: 0.4rem;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  font-family: inherit;
+  text-shadow: none;
 }
 
 .kpi-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 0.775rem;
+  font-size: 0.725rem;
   color: var(--text-muted);
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 0.4rem;
+  margin-top: 0.2rem;
 }
 
 .kpi-badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.3rem;
-  padding: 0.2rem 0.6rem;
-  border-radius: var(--radius-full);
-  font-weight: 700;
-  font-size: 0.725rem;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: var(--shadow-inner-light);
+  gap: 0.25rem;
+  padding: 0.12rem 0.45rem;
+  border-radius: 2px;
+  font-weight: 600;
+  font-size: 0.7rem;
+  border: 1px solid transparent;
 }
 
 .kpi-badge.positive {
-  background: rgba(16, 185, 129, 0.2);
-  color: #34d399;
+  background: rgba(16, 124, 65, 0.12);
+  color: var(--pbi-green);
+  border-color: rgba(16, 124, 65, 0.25);
 }
 
 .kpi-badge.neutral {
-  background: rgba(99, 102, 241, 0.2);
-  color: #a5b4fc;
+  background: rgba(17, 141, 255, 0.12);
+  color: var(--pbi-blue);
+  border-color: rgba(17, 141, 255, 0.25);
 }
 
 .kpi-badge.negative {
-  background: rgba(244, 63, 94, 0.2);
-  color: #fb7185;
+  background: rgba(214, 69, 80, 0.12);
+  color: var(--pbi-red);
+  border-color: rgba(214, 69, 80, 0.25);
 }
 
-/* Charts Grid Layout */
+/* ==========================================================================
+   Power BI Visual Containers (Charts Grid)
+   ========================================================================== */
 .charts-grid-2col {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  gap: 1.35rem;
+  gap: 0.95rem;
 }
 
 .col-8 { grid-column: span 8; }
@@ -779,54 +720,84 @@ body {
 .col-6 { grid-column: span 6; }
 .col-12 { grid-column: span 12; }
 
-/* Glassmorphic Chart Cards */
+/* Power BI Visual Card Box */
 .chart-card {
-  background: var(--glass-card);
-  backdrop-filter: blur(20px) saturate(190%);
-  -webkit-backdrop-filter: blur(20px) saturate(190%);
+  background: var(--bg-card);
   border: 1px solid var(--border-glass);
-  border-radius: var(--radius-lg);
-  padding: 1.5rem 1.65rem;
-  box-shadow: var(--shadow-glass), var(--shadow-inner-light);
+  border-radius: 2px;
+  padding: 1.15rem 1.25rem;
+  box-shadow: var(--shadow-glass);
   display: flex;
   flex-direction: column;
   position: relative;
-  transition: all var(--transition-normal);
+  transition: all var(--transition-fast);
 }
 
 .chart-card:hover {
-  border-color: var(--border-glass-hover);
-  box-shadow: var(--shadow-glass-hover), var(--shadow-inner-light);
+  border-color: var(--border-accent);
 }
 
+/* Power BI Visual Header & Action Toolbar */
 .chart-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  margin-bottom: 1.35rem;
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px solid var(--border-subtle);
   flex-wrap: wrap;
-  gap: 0.85rem;
+  gap: 0.5rem;
 }
 
 .chart-title-area {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.15rem;
 }
 
 .chart-title {
-  font-size: 1.05rem;
-  font-weight: 800;
+  font-size: 0.925rem;
+  font-weight: 700;
   color: var(--text-primary);
   display: flex;
   align-items: center;
-  gap: 0.55rem;
-  letter-spacing: -0.02em;
+  gap: 0.45rem;
+  letter-spacing: -0.01em;
 }
 
 .chart-subtitle {
-  font-size: 0.795rem;
+  font-size: 0.725rem;
   color: var(--text-muted);
+}
+
+/* Power BI Visual Hover Action Icons (Filter, Focus, More) */
+.pbi-visual-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  opacity: 0.65;
+  transition: opacity var(--transition-fast);
+}
+
+.chart-card:hover .pbi-visual-actions {
+  opacity: 1;
+}
+
+.pbi-icon-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pbi-icon-btn:hover {
+  background: var(--bg-primary);
+  color: var(--pbi-yellow);
 }
 
 .chart-controls {
@@ -835,42 +806,41 @@ body {
   gap: 0.45rem;
 }
 
+/* Power BI Slicer Button Group (Yearly / Quarterly / Monthly) */
 .pill-toggle-group {
   display: inline-flex;
-  background: var(--glass-elevated);
-  backdrop-filter: blur(12px);
+  background: var(--bg-primary);
   border: 1px solid var(--border-glass);
-  box-shadow: var(--shadow-inner-light);
-  border-radius: var(--radius-sm);
-  padding: 0.25rem;
+  border-radius: 2px;
+  padding: 2px;
 }
 
 .pill-btn {
   background: transparent;
   border: none;
   color: var(--text-secondary);
-  font-size: 0.75rem;
-  font-weight: 700;
-  padding: 0.3rem 0.75rem;
-  border-radius: 8px;
+  font-size: 0.725rem;
+  font-weight: 600;
+  padding: 0.25rem 0.65rem;
+  border-radius: 2px;
   cursor: pointer;
   transition: all var(--transition-fast);
 }
 
 .pill-btn.active {
-  background: var(--accent-primary);
-  color: #ffffff;
-  box-shadow: 0 2px 10px var(--accent-primary-glow), var(--shadow-inner-light);
+  background: var(--pbi-yellow);
+  color: #11100F;
+  font-weight: 700;
 }
 
 .chart-body {
   position: relative;
   width: 100%;
   flex: 1;
-  min-height: 290px;
+  min-height: 270px;
 }
 
-/* Donut Center Overlay & Permanent Status Breakdown */
+/* Donut Center Overlay */
 .donut-chart-wrapper {
   position: relative;
   width: 100%;
@@ -894,62 +864,53 @@ body {
 }
 
 .donut-center-val {
-  font-size: 1.5rem;
-  font-weight: 800;
+  font-size: 1.45rem;
+  font-weight: 700;
   color: var(--text-primary);
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  letter-spacing: -0.03em;
   line-height: 1.1;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
 }
 
 .donut-center-label {
-  font-size: 0.675rem;
+  font-size: 0.65rem;
   font-weight: 700;
-  color: var(--accent-emerald);
+  color: var(--pbi-green);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-top: 0.15rem;
+  letter-spacing: 0.06em;
+  margin-top: 0.1rem;
 }
 
+/* Power BI Donut Status Grid Visual */
 .status-stats-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.65rem;
-  margin-top: 1rem;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
   width: 100%;
 }
 
 .status-stat-card {
-  background: var(--glass-elevated);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: var(--bg-primary);
   border: 1px solid var(--border-glass);
-  box-shadow: var(--shadow-inner-light);
-  border-radius: var(--radius-sm);
-  padding: 0.65rem 0.8rem;
+  border-radius: 2px;
+  padding: 0.5rem 0.65rem;
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 0.25rem;
   transition: all var(--transition-fast);
 }
 
-.status-stat-card:hover {
-  background: var(--glass-card-hover);
-  border-color: var(--border-glass-hover);
-  transform: translateY(-2px);
-}
-
-.status-stat-card.delivered { border-left: 3px solid #10b981; }
-.status-stat-card.processing { border-left: 3px solid #6366f1; }
-.status-stat-card.returned { border-left: 3px solid #f59e0b; }
-.status-stat-card.cancelled { border-left: 3px solid #f43f5e; }
+.status-stat-card.delivered { border-left: 3px solid var(--pbi-green); }
+.status-stat-card.processing { border-left: 3px solid var(--pbi-blue); }
+.status-stat-card.returned { border-left: 3px solid var(--pbi-yellow); }
+.status-stat-card.cancelled { border-left: 3px solid var(--pbi-red); }
 
 .status-stat-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 0.775rem;
+  font-size: 0.725rem;
   font-weight: 700;
 }
 
@@ -961,76 +922,75 @@ body {
 }
 
 .status-indicator-dot {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   display: inline-block;
 }
 
-.status-indicator-dot.delivered { background: #10b981; box-shadow: 0 0 8px rgba(16, 185, 129, 0.6); }
-.status-indicator-dot.processing { background: #6366f1; box-shadow: 0 0 8px rgba(99, 102, 241, 0.6); }
-.status-indicator-dot.returned { background: #f59e0b; box-shadow: 0 0 8px rgba(245, 158, 11, 0.6); }
-.status-indicator-dot.cancelled { background: #f43f5e; box-shadow: 0 0 8px rgba(244, 63, 94, 0.6); }
+.status-indicator-dot.delivered { background: var(--pbi-green); }
+.status-indicator-dot.processing { background: var(--pbi-blue); }
+.status-indicator-dot.returned { background: var(--pbi-yellow); }
+.status-indicator-dot.cancelled { background: var(--pbi-red); }
 
 .status-stat-badge {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.725rem;
+  font-size: 0.675rem;
   font-weight: 700;
-  padding: 0.1rem 0.4rem;
-  border-radius: var(--radius-xs);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.08rem 0.35rem;
+  border-radius: 2px;
+  border: 1px solid var(--border-glass);
 }
 
-.status-stat-badge.delivered { background: rgba(16, 185, 129, 0.15); color: #34d399; }
-.status-stat-badge.processing { background: rgba(99, 102, 241, 0.15); color: #818cf8; }
-.status-stat-badge.returned { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
-.status-stat-badge.cancelled { background: rgba(244, 63, 94, 0.15); color: #fb7185; }
+.status-stat-badge.delivered { background: rgba(16, 124, 65, 0.12); color: var(--pbi-green); }
+.status-stat-badge.processing { background: rgba(17, 141, 255, 0.12); color: var(--pbi-blue); }
+.status-stat-badge.returned { background: rgba(242, 200, 17, 0.15); color: #D9A700; }
+[data-theme="dark"] .status-stat-badge.returned { color: var(--pbi-yellow); }
+.status-stat-badge.cancelled { background: rgba(214, 69, 80, 0.12); color: var(--pbi-red); }
 
 .status-stat-orders {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.85rem;
-  font-weight: 800;
+  font-size: 0.825rem;
+  font-weight: 700;
   color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
 }
 
 .status-stat-rev {
-  font-size: 0.725rem;
+  font-size: 0.7rem;
   color: var(--text-muted);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: 'JetBrains Mono', monospace;
+  font-variant-numeric: tabular-nums;
 }
 
 /* Risk Callout Banner */
 .risk-callout-box {
-  background: rgba(244, 63, 94, 0.12);
-  backdrop-filter: blur(12px);
-  border-left: 4px solid var(--accent-rose);
-  border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
-  padding: 0.75rem 1rem;
-  margin-bottom: 1.15rem;
+  background: rgba(214, 69, 80, 0.08);
+  border-left: 3px solid var(--pbi-red);
+  border-radius: 0 2px 2px 0;
+  padding: 0.6rem 0.85rem;
+  margin-bottom: 0.85rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 0.8rem;
-  box-shadow: var(--shadow-inner-light);
+  font-size: 0.775rem;
 }
 
 .risk-callout-text {
-  color: #fca5a5;
+  color: var(--text-primary);
 }
 
 .risk-callout-stat {
-  font-family: 'JetBrains Mono', monospace;
-  font-weight: 800;
-  color: #fb7185;
-  background: rgba(244, 63, 94, 0.2);
-  padding: 0.2rem 0.6rem;
-  border-radius: var(--radius-full);
+  font-weight: 700;
+  color: var(--pbi-red);
+  background: rgba(214, 69, 80, 0.15);
+  padding: 0.15rem 0.5rem;
+  border-radius: 2px;
 }
 
-/* Glassmorphic Modern Table */
+/* ==========================================================================
+   Power BI Table / Matrix Visual
+   ========================================================================== */
 .table-responsive {
   width: 100%;
   overflow-x: auto;
@@ -1040,235 +1000,303 @@ body {
   width: 100%;
   border-collapse: collapse;
   text-align: left;
-  font-size: 0.825rem;
+  font-size: 0.785rem;
 }
 
 .modern-table th {
-  padding: 0.85rem 0.95rem;
+  padding: 0.6rem 0.75rem;
   color: var(--text-secondary);
   font-weight: 700;
-  border-bottom: 1px solid var(--border-glass);
+  border-bottom: 2px solid var(--border-glass);
   white-space: nowrap;
-  text-transform: uppercase;
-  font-size: 0.7rem;
-  letter-spacing: 0.06em;
-  background: rgba(255, 255, 255, 0.02);
+  font-size: 0.725rem;
+  background: var(--bg-primary);
+  letter-spacing: normal;
+  text-transform: none;
 }
 
 .modern-table td {
-  padding: 0.85rem 0.95rem;
-  border-bottom: 1px solid var(--border-glass-subtle);
+  padding: 0.55rem 0.75rem;
+  border-bottom: 1px solid var(--border-subtle);
   color: var(--text-primary);
   white-space: nowrap;
+  font-variant-numeric: tabular-nums;
 }
 
 .modern-table tbody tr {
-  transition: all var(--transition-fast);
+  transition: background-color var(--transition-fast);
+}
+
+.modern-table tbody tr:nth-child(even) {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+[data-theme="dark"] .modern-table tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02);
 }
 
 .modern-table tbody tr:hover {
-  background: var(--glass-card-hover);
+  background: rgba(242, 200, 17, 0.08);
 }
 
+/* Power BI Table Rank Badges */
 .rank-badge {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  border-radius: 2px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.725rem;
-  font-weight: 800;
-  background: var(--glass-elevated);
+  font-size: 0.7rem;
+  font-weight: 700;
+  background: var(--bg-primary);
   border: 1px solid var(--border-glass);
   color: var(--text-secondary);
-  box-shadow: var(--shadow-inner-light);
 }
 
 .rank-badge.top-1 {
-  background: linear-gradient(135deg, #fef08a 0%, #facc15 100%);
-  color: #713f12;
-  box-shadow: 0 0 12px rgba(250, 204, 21, 0.4);
+  background: var(--pbi-yellow);
+  color: #11100F;
+  border-color: var(--pbi-yellow);
 }
 
 .rank-badge.top-2 {
-  background: linear-gradient(135deg, #f1f5f9 0%, #cbd5e1 100%);
-  color: #1e293b;
-  box-shadow: 0 0 12px rgba(203, 213, 225, 0.4);
+  background: #C8C6C4;
+  color: #11100F;
+  border-color: #C8C6C4;
 }
 
 .rank-badge.top-3 {
-  background: linear-gradient(135deg, #fed7aa 0%, #fb923c 100%);
-  color: #7c2d12;
-  box-shadow: 0 0 12px rgba(251, 146, 60, 0.4);
+  background: #E66C37;
+  color: #FFFFFF;
+  border-color: #E66C37;
 }
 
+/* Status Badges */
 .status-badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  padding: 0.25rem 0.65rem;
-  border-radius: var(--radius-full);
-  font-size: 0.725rem;
-  font-weight: 700;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: var(--shadow-inner-light);
+  gap: 0.3rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 2px;
+  font-size: 0.7rem;
+  font-weight: 600;
 }
 
-.status-badge.delivered { background: rgba(16, 185, 129, 0.2); color: #34d399; }
-.status-badge.processing { background: rgba(99, 102, 241, 0.2); color: #818cf8; }
-.status-badge.returned { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
-.status-badge.cancelled { background: rgba(244, 63, 94, 0.2); color: #fb7185; }
+.status-badge.delivered { background: rgba(16, 124, 65, 0.12); color: var(--pbi-green); }
+.status-badge.processing { background: rgba(17, 141, 255, 0.12); color: var(--pbi-blue); }
+.status-badge.returned { background: rgba(242, 200, 17, 0.15); color: #D9A700; }
+[data-theme="dark"] .status-badge.returned { color: var(--pbi-yellow); }
+.status-badge.cancelled { background: rgba(214, 69, 80, 0.12); color: var(--pbi-red); }
 
-/* Mini Progress Bar */
+/* Table Data Bar */
 .mini-bar-track {
-  width: 90px;
+  width: 75px;
   height: 6px;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 3px;
+  background: var(--border-subtle);
+  border-radius: 1px;
   overflow: hidden;
   display: inline-block;
   vertical-align: middle;
-  margin-right: 0.6rem;
+  margin-right: 0.5rem;
 }
 
 .mini-bar-fill {
   height: 100%;
-  border-radius: 3px;
-  background: linear-gradient(90deg, var(--accent-primary), var(--accent-cyan));
+  background: var(--pbi-blue);
 }
 
-/* Glassmorphic What-If Strategy Simulator */
+/* ==========================================================================
+   Power BI Parameter / What-If Scenario Panel
+   ========================================================================== */
 .simulator-box {
-  background: linear-gradient(135deg, rgba(22, 33, 56, 0.65) 0%, rgba(16, 24, 40, 0.8) 100%);
-  backdrop-filter: blur(24px) saturate(190%);
-  -webkit-backdrop-filter: blur(24px) saturate(190%);
-  border: 1px solid var(--border-accent);
-  border-radius: var(--radius-lg);
-  padding: 1.75rem 2rem;
-  box-shadow: var(--shadow-glass), var(--shadow-inner-light);
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  border-left: 4px solid var(--pbi-blue);
+  border-radius: 2px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: var(--shadow-glass);
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.75rem;
+  gap: 1.5rem;
   align-items: center;
 }
 
 .simulator-controls {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1rem;
 }
 
 .slider-group {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.4rem;
 }
 
 .slider-header {
   display: flex;
   justify-content: space-between;
-  font-size: 0.825rem;
-  font-weight: 700;
+  font-size: 0.785rem;
+  font-weight: 600;
+  color: var(--text-primary);
 }
 
 .custom-range {
   width: 100%;
-  height: 6px;
-  background: rgba(255, 255, 255, 0.12);
-  border-radius: 4px;
+  height: 5px;
+  background: var(--border-glass);
+  border-radius: 2px;
   outline: none;
-  accent-color: var(--accent-primary);
+  accent-color: var(--pbi-yellow);
   cursor: pointer;
 }
 
 .simulator-outcome {
-  background: var(--glass-card);
-  backdrop-filter: blur(20px);
-  border: 1px solid var(--border-glass-hover);
-  border-radius: var(--radius-md);
-  padding: 1.5rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-glass);
+  border-radius: 2px;
+  padding: 1.25rem;
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
-  box-shadow: var(--shadow-inner-light), 0 8px 30px rgba(0, 0, 0, 0.25);
+  gap: 0.65rem;
 }
 
 .outcome-gain {
-  font-size: 1.6rem;
-  font-weight: 800;
-  color: var(--accent-emerald);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--pbi-green);
   letter-spacing: -0.02em;
-  text-shadow: 0 0 20px var(--accent-emerald-glow);
+  font-variant-numeric: tabular-nums;
 }
 
 .outcome-stat {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
 }
 
-/* Pagination Controls */
+/* ==========================================================================
+   Power BI Pagination Controls
+   ========================================================================== */
 .pagination-controls {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 0.5rem 0;
-  font-size: 0.795rem;
+  padding: 0.75rem 0.5rem 0;
+  font-size: 0.75rem;
   color: var(--text-secondary);
 }
 
 .pagination-btn {
-  background: var(--glass-elevated);
-  backdrop-filter: blur(12px);
+  background: var(--bg-primary);
   border: 1px solid var(--border-glass);
-  box-shadow: var(--shadow-inner-light);
   color: var(--text-primary);
-  padding: 0.4rem 0.85rem;
-  border-radius: var(--radius-xs);
+  padding: 0.35rem 0.75rem;
+  border-radius: 2px;
   cursor: pointer;
-  font-weight: 700;
+  font-weight: 600;
+  font-size: 0.75rem;
   transition: all var(--transition-fast);
 }
 
 .pagination-btn:disabled {
-  opacity: 0.35;
+  opacity: 0.4;
   cursor: not-allowed;
 }
 
 .pagination-btn:not(:disabled):hover {
-  background: var(--accent-primary);
-  border-color: var(--accent-primary);
-  color: #fff;
-  box-shadow: 0 0 16px var(--accent-primary-glow);
+  background: var(--pbi-yellow);
+  border-color: var(--pbi-yellow);
+  color: #11100F;
+}
+
+/* ==========================================================================
+   Power BI Report Page Navigation Tabs Bar (Signature Power BI Feature)
+   ========================================================================== */
+.pbi-report-page-bar {
+  position: sticky;
+  bottom: 0;
+  z-index: 95;
+  background: var(--bg-card);
+  border-top: 1px solid var(--border-glass);
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.25rem;
+  height: 38px;
+}
+
+.pbi-page-tabs-container {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  overflow-x: auto;
+}
+
+.pbi-page-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.45rem 0.95rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.pbi-page-tab:hover {
+  color: var(--text-primary);
+  background: var(--bg-primary);
+}
+
+.pbi-page-tab.active {
+  color: var(--text-primary);
+  border-bottom-color: var(--pbi-yellow);
+  background: var(--bg-primary);
+  font-weight: 700;
+}
+
+.pbi-page-status {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 /* Footer */
 .dashboard-footer {
   margin-top: auto;
-  padding: 1.75rem 2rem;
-  background: var(--glass-nav);
-  backdrop-filter: blur(18px);
+  padding: 1.25rem 1.75rem;
+  background: var(--bg-card);
   border-top: 1px solid var(--border-glass);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 0.775rem;
+  font-size: 0.725rem;
   color: var(--text-muted);
 }
 
 .footer-tags {
   display: flex;
-  gap: 0.6rem;
+  gap: 0.5rem;
 }
 
 .footer-tag {
-  background: var(--glass-card);
-  padding: 0.25rem 0.6rem;
-  border-radius: var(--radius-xs);
+  background: var(--bg-primary);
+  padding: 0.2rem 0.5rem;
+  border-radius: 2px;
   border: 1px solid var(--border-glass);
-  box-shadow: var(--shadow-inner-light);
 }
 
 /* Responsive Breakpoints */
@@ -1306,6 +1334,6 @@ body {
     grid-template-columns: 1fr;
   }
   .dashboard-content {
-    padding: 1.25rem 1rem;
+    padding: 1rem 0.75rem 3.5rem;
   }
 }
